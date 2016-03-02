@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 2, 2016 5:55:12 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.TrabalhaPontoDeVenda" table="TrabalhaPontoDeVenda" catalog="vvv" optimistic-lock="version">
+        <composite-id name="id" class="model.TrabalhaPontoDeVendaId">
+            <key-property name="idFuncionario" type="int">
+                <column name="idFuncionario" />
+            </key-property>
+            <key-property name="idPontoDeVenda" type="int">
+                <column name="idPontoDeVenda" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="funcionario" class="model.Funcionario" update="false" insert="false" fetch="select">
+            <column name="idFuncionario" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pontoDeVenda" class="model.PontoDeVenda" update="false" insert="false" fetch="select">
+            <column name="idPontoDeVenda" not-null="true" />
+        </many-to-one>
+        <property name="diasTrabalho" type="string">
+            <column name="diasTrabalho" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

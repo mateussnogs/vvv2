@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 2, 2016 5:55:12 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Cliente" table="Cliente" catalog="vvv" optimistic-lock="version">
+        <id name="idCliente" type="java.lang.Integer">
+            <column name="idCliente" />
+            <generator class="identity" />
+        </id>
+        <property name="nome" type="string">
+            <column name="nome" length="45" />
+        </property>
+        <property name="idade" type="java.lang.Integer">
+            <column name="idade" />
+        </property>
+        <property name="cpf" type="java.lang.Integer">
+            <column name="cpf" />
+        </property>
+        <property name="telefone" type="string">
+            <column name="telefone" length="45" />
+        </property>
+        <property name="profissao" type="string">
+            <column name="profissao" length="45" />
+        </property>
+        <property name="userName" type="string">
+            <column name="userName" length="45" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="45" />
+        </property>
+        <set name="reservas" table="Reserva" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCliente" />
+            </key>
+            <one-to-many class="model.Reserva" />
+        </set>
+    </class>
+</hibernate-mapping>
