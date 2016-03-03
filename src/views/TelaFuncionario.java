@@ -11,16 +11,17 @@ import model.Funcionario;
  *
  * @author mateus
  */
-public class TelaGerente extends javax.swing.JFrame {
-    public Funcionario gerente;
-    public TelaCadastroFuncionario telaCadastroFuncionario = new TelaCadastroFuncionario();
+public class TelaFuncionario extends javax.swing.JFrame {
+
+    public Funcionario funcionario;
     /**
-     * Creates new form TelaGerente
+     * Creates new form TelaFuncionario
      */
-    public TelaGerente(Funcionario gerente) {        
+    public TelaFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
         initComponents();
-        this.gerente = gerente;
-        textoLogado.setText(this.gerente.getNome() + " logado");
+        textoLogado.setText(funcionario.getNome() + " logado");
+        
     }
 
     /**
@@ -32,27 +33,19 @@ public class TelaGerente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cadastrarFuncionarioButton = new javax.swing.JButton();
         cadastrarClienteButton = new javax.swing.JButton();
-        acessarDadosClienteButton = new javax.swing.JButton();
+        loginClienteButton = new javax.swing.JButton();
         irViagensButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         textoLogado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        cadastrarFuncionarioButton.setText("Cadastrar Funcionário");
-        cadastrarFuncionarioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastrarFuncionarioButtonActionPerformed(evt);
-            }
-        });
-
         cadastrarClienteButton.setText("Cadastrar Cliente");
 
-        acessarDadosClienteButton.setText("Fazer Login do Cliente");
+        loginClienteButton.setText("Acessar dados cliente");
 
-        irViagensButton.setText("Ir para viagens");
+        irViagensButton.setText("Ir Para Viagens");
 
         logoutButton.setText("Logout");
 
@@ -63,42 +56,33 @@ public class TelaGerente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(acessarDadosClienteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(irViagensButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cadastrarFuncionarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cadastrarClienteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textoLogado, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(irViagensButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textoLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cadastrarClienteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loginClienteButton))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(9, 9, 9)
+                .addContainerGap()
                 .addComponent(textoLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cadastrarFuncionarioButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(cadastrarClienteButton)
-                .addGap(10, 10, 10)
-                .addComponent(acessarDadosClienteButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(irViagensButton)
+                .addGap(18, 18, 18)
+                .addComponent(loginClienteButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(irViagensButton)
+                .addGap(18, 18, 18)
                 .addComponent(logoutButton)
                 .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cadastrarFuncionarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarFuncionarioButtonActionPerformed
-        this.setVisible(false);
-        telaCadastroFuncionario.telaGerente = this;
-        telaCadastroFuncionario.setVisible(true);
-    }//GEN-LAST:event_cadastrarFuncionarioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,13 +101,13 @@ public class TelaGerente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -135,10 +119,9 @@ public class TelaGerente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton acessarDadosClienteButton;
     private javax.swing.JButton cadastrarClienteButton;
-    private javax.swing.JButton cadastrarFuncionarioButton;
     private javax.swing.JButton irViagensButton;
+    private javax.swing.JButton loginClienteButton;
     private javax.swing.JButton logoutButton;
     private javax.swing.JTextField textoLogado;
     // End of variables declaration//GEN-END:variables

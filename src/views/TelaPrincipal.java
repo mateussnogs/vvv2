@@ -14,11 +14,16 @@ import model.Funcionario;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
-    public FuncionarioCtrl funcCtrl = new FuncionarioCtrl();
+    public FuncionarioCtrl funcCtrl;
+    public TelaGerente telaGerente;
+    public TelaFuncionario telaFuncionario;
+    public Funcionario funcionarioLogado;
     /**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
+        funcCtrl = new FuncionarioCtrl();
+        funcionarioLogado = new Funcionario();
         initComponents();
     }
 
@@ -126,15 +131,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         if (funcCtrl.checkFuncionarioRegistered(username, pass)) {
             Funcionario func = funcCtrl.getFuncionarioByUserPass(username, pass);
-            if (gerenteCheckBox.isSelected() && func.getCargo() == "Gerente") {
-                //ir pra tela do gerente
+            funcionarioLogado = func;
+            if (gerenteCheckBox.isSelected() && func.getCargo().equals("Gerente")) {
+                telaGerente = new TelaGerente(funcionarioLogado);
+                this.setVisible(false);                
+                telaGerente.setVisible(true);                
             }
             else {
-                //ir pra tela do funcionario normal
+                telaFuncionario = new TelaFuncionario(funcionarioLogado);
             }
         }
         else
-            System.out.println("tem nao");
+            System.out.println("Funcionario não registrado");
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
