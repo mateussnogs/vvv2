@@ -17,21 +17,17 @@ public class Cliente  implements java.io.Serializable {
      private Integer cpf;
      private String telefone;
      private String profissao;
-     private String userName;
-     private String password;
      private Set reservas = new HashSet(0);
 
     public Cliente() {
     }
 
-    public Cliente(String nome, Integer idade, Integer cpf, String telefone, String profissao, String userName, String password, Set reservas) {
+    public Cliente(String nome, Integer idade, Integer cpf, String telefone, String profissao, Set reservas) {
        this.nome = nome;
        this.idade = idade;
        this.cpf = cpf;
        this.telefone = telefone;
        this.profissao = profissao;
-       this.userName = userName;
-       this.password = password;
        this.reservas = reservas;
     }
    
@@ -76,20 +72,6 @@ public class Cliente  implements java.io.Serializable {
     
     public void setProfissao(String profissao) {
         this.profissao = profissao;
-    }
-    public String getUserName() {
-        return this.userName;
-    }
-    
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-    public String getPassword() {
-        return this.password;
-    }
-    
-    public void setPassword(String password) {
-        this.password = password;
     }
     public Set getReservas() {
         return this.reservas;

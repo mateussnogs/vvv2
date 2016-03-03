@@ -26,10 +26,9 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="acessarDadosClienteButton" max="32767" attributes="0"/>
                   <Component id="irViagensButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="logoutButton" max="32767" attributes="0"/>
-                  <Component id="cadastrarFuncionarioButton" max="32767" attributes="0"/>
+                  <Component id="cadastrarFuncionarioButton" pref="193" max="32767" attributes="0"/>
                   <Component id="cadastrarClienteButton" max="32767" attributes="0"/>
                   <Component id="textoLogado" alignment="1" max="32767" attributes="0"/>
               </Group>
@@ -44,13 +43,11 @@
               <Component id="textoLogado" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="cadastrarFuncionarioButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="cadastrarClienteButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-              <Component id="acessarDadosClienteButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="irViagensButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Component id="logoutButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="61" max="32767" attributes="0"/>
           </Group>
@@ -70,16 +67,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar Cliente"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="acessarDadosClienteButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Fazer Login do Cliente"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarClienteButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="irViagensButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ir para viagens"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="irViagensButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="logoutButton">
       <Properties>

@@ -23,12 +23,6 @@
         <property name="profissao" type="string">
             <column name="profissao" length="45" />
         </property>
-        <property name="userName" type="string">
-            <column name="userName" length="45" />
-        </property>
-        <property name="password" type="string">
-            <column name="password" length="45" />
-        </property>
         <set name="reservas" table="Reserva" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="idCliente" />

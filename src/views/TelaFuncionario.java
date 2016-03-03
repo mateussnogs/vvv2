@@ -14,13 +14,17 @@ import model.Funcionario;
 public class TelaFuncionario extends javax.swing.JFrame {
 
     public Funcionario funcionario;
+    public TelaCadastroCliente telaCadastroCliente;
+    public TelaPrincipal telaPrincipal;
     /**
      * Creates new form TelaFuncionario
      */
-    public TelaFuncionario(Funcionario funcionario) {
+    public TelaFuncionario(Funcionario funcionario, TelaPrincipal telaPrincipal) {
         this.funcionario = funcionario;
+        this.telaPrincipal = telaPrincipal;
         initComponents();
-        textoLogado.setText(funcionario.getNome() + " logado");
+        if (funcionario != null)
+            textoLogado.setText(funcionario.getNome() + " logado");
         
     }
 
@@ -34,57 +38,93 @@ public class TelaFuncionario extends javax.swing.JFrame {
     private void initComponents() {
 
         cadastrarClienteButton = new javax.swing.JButton();
-        loginClienteButton = new javax.swing.JButton();
         irViagensButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         textoLogado = new javax.swing.JTextField();
+        cadastrarDadosButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         cadastrarClienteButton.setText("Cadastrar Cliente");
-
-        loginClienteButton.setText("Acessar dados cliente");
+        cadastrarClienteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarClienteButtonActionPerformed(evt);
+            }
+        });
 
         irViagensButton.setText("Ir Para Viagens");
 
         logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
 
         textoLogado.setEditable(false);
+
+        cadastrarDadosButton.setText("Cadastrar Dados");
+        cadastrarDadosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarDadosButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(irViagensButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textoLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cadastrarClienteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(loginClienteButton))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cadastrarDadosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(irViagensButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textoLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cadastrarClienteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(textoLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(cadastrarDadosButton)
                 .addGap(18, 18, 18)
                 .addComponent(cadastrarClienteButton)
                 .addGap(18, 18, 18)
-                .addComponent(loginClienteButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(irViagensButton)
                 .addGap(18, 18, 18)
                 .addComponent(logoutButton)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
+    private void cadastrarClienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarClienteButtonActionPerformed
+        telaCadastroCliente = new TelaCadastroCliente(this, null);
+        this.setVisible(false);
+        telaCadastroCliente.setVisible(true);
+        
+    }//GEN-LAST:event_cadastrarClienteButtonActionPerformed
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        funcionario = null;
+        this.setVisible(false);
+        telaPrincipal.setVisible(true);
+    }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void cadastrarDadosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarDadosButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cadastrarDadosButtonActionPerformed
+
+    /* TODO add your handling code here:
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -120,8 +160,8 @@ public class TelaFuncionario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cadastrarClienteButton;
+    private javax.swing.JButton cadastrarDadosButton;
     private javax.swing.JButton irViagensButton;
-    private javax.swing.JButton loginClienteButton;
     private javax.swing.JButton logoutButton;
     private javax.swing.JTextField textoLogado;
     // End of variables declaration//GEN-END:variables

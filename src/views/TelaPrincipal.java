@@ -133,12 +133,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             Funcionario func = funcCtrl.getFuncionarioByUserPass(username, pass);
             funcionarioLogado = func;
             if (gerenteCheckBox.isSelected() && func.getCargo().equals("Gerente")) {
-                telaGerente = new TelaGerente(funcionarioLogado);
+                telaGerente = new TelaGerente(funcionarioLogado, this);
                 this.setVisible(false);                
                 telaGerente.setVisible(true);                
             }
             else {
-                telaFuncionario = new TelaFuncionario(funcionarioLogado);
+                telaFuncionario = new TelaFuncionario(funcionarioLogado, this);
+                this.setVisible(false);
+                telaFuncionario.setVisible(true);
             }
         }
         else
