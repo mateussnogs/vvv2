@@ -7,7 +7,7 @@
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/vvv?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">mn261194</property>
+    <property name="hibernate.connection.password">1234</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <mapping resource="model/Escala.hbm.xml"/>
     <mapping resource="model/PontoDeVenda.hbm.xml"/>
