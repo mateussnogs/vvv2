@@ -6,47 +6,13 @@
 package daos;
 
 import java.util.List;
-import model.Funcionario;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import vvv2.HibernateUtil;
+import java.util.logging.Logger;
 
-/**
- *
- * @author mateus
- */
-public class FuncionarioDAO {
+public class FuncionarioDAO extends DOA{
+    public static final Logger logger = Logger.getLogger(FuncionarioDAO.class.getName());
     
-    
-    public FuncionarioDAO() { }
-    
-    
-    
-    public static List getFuncionarioByUserNameAndPass(String user, String pass) {
-        List resultList = null;
-        
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            Query q = session.createQuery("select f from Funcionario as f where f.userName = " + "'" + user.toString() + "'" + " and f.password = " + "'" + pass.toString() + "'");
-            resultList = q.list();
-            
-        } catch (HibernateException he) {
-            he.printStackTrace();
-        }
-        
-        return resultList;
-    }
-    
-    public static void CadastrarFuncionario(Funcionario f) {
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.save(f);
-            session.getTransaction().commit();
-        } catch (HibernateException he) {
-            he.printStackTrace();
-        }
+    public static List encontrarFuncionarioPorUsuario(String usuario){
+        session.beginTransaction();
+        return session.createQuery("select f from Funcionario as funcionario where funcionario.usuario = '" + usuario + "'").list();
     }
 }

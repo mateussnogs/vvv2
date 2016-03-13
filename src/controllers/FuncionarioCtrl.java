@@ -1,41 +1,54 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import daos.FuncionarioDAO;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Funcionario;
+import lib.jBCrypt.BCrypt;
 
-/**
- *
- * @author mateus
- */
+
 public class FuncionarioCtrl {
     
-    public FuncionarioCtrl() {
+    public static final Logger logger = Logger.getLogger(FuncionarioCtrl.class.getName());
+    public static Funcionario logado = null;
+    
+    public static boolean verificarExistenciaFuncionario(String user) {
+        List query = FuncionarioDAO.encontrarFuncionarioPorUsuario(user);
+        return !(query == null || query.isEmpty());
+    }
+    
+    public static Funcionario encontrarFuncionarioPorUsuario(String user) {
+        List query = FuncionarioDAO.encontrarFuncionarioPorUsuario(user);
+        return query == null? null : (Funcionario)(query.get(0));
+    }
+    
+    /*@todo Add Bean Validation here**/
+    public static void cadastrarFuncionario(String nome, String endereco, String telefone, int cargo, String senha, String userName, String cpf) {
+        FuncionarioDAO.salvar(new Funcionario(
+                nome,
+                endereco,
+                telefone,
+                cargo,
+                BCrypt.hashpw(senha, BCrypt.gensalt(12)).getBytes(),
+                userName,
+                cpf
+        ));
+    }
+    
+    public static Boolean login(String usuario, String senha) throws UnsupportedEncodingException{
+        Funcionario funcionario = FuncionarioCtrl.encontrarFuncionarioPorUsuario(usuario);
         
-    }
-    
-    public boolean checkFuncionarioRegistered(String user, String pass) {
-        List resultList = FuncionarioDAO.getFuncionarioByUserNameAndPass(user, pass);
-        if (resultList != null && resultList.size() == 0) {
-            return false;
-        } else {
-            return true;
+        if(FuncionarioCtrl.logado == null){
+            if(funcionario != null && BCrypt.checkpw(senha, new String(funcionario.getSenha(), "UTF8"))){
+                FuncionarioCtrl.logado = funcionario;
+                return true;
+            }
+        }else{
+            logger.log(Level.SEVERE, "Usuário já logado");
         }
+        
+        return false;
     }
-    
-    public Funcionario getFuncionarioByUserPass(String user, String pass) {
-        Funcionario c = (Funcionario)FuncionarioDAO.getFuncionarioByUserNameAndPass(user, pass).get(0);
-        return c;
-    }
-    
-    public void cadastrarFuncionario(Funcionario func) {
-        FuncionarioDAO.CadastrarFuncionario(func);
-    }
-    
-    
 }
