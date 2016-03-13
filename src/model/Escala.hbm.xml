@@ -1,30 +1,30 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Mar 2, 2016 5:55:12 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 13-Mar-2016 14:26:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="model.Escala" table="Escala" catalog="vvv" optimistic-lock="version">
-        <id name="idEscala" type="java.lang.Integer">
-            <column name="idEscala" />
+    <class name="model.Escala" table="escala" catalog="vvv" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="cidadeByCidadeId1" class="model.Cidade" fetch="select">
-            <column name="Cidade_id1" not-null="true" />
+        <many-to-one name="cidadeByCidadeDestinoId" class="model.Cidade" fetch="select">
+            <column name="cidade_destino_id" not-null="true" />
         </many-to-one>
-        <many-to-one name="cidadeByCidadeId" class="model.Cidade" fetch="select">
-            <column name="Cidade_id" not-null="true" />
+        <many-to-one name="cidadeByCidadeOrigemId" class="model.Cidade" fetch="select">
+            <column name="cidade_origem_id" not-null="true" />
         </many-to-one>
         <many-to-one name="modal" class="model.Modal" fetch="select">
-            <column name="idModal" />
+            <column name="modal_id" not-null="true" />
         </many-to-one>
         <many-to-one name="viagem" class="model.Viagem" fetch="select">
-            <column name="Viagem_id" not-null="true" />
+            <column name="viagem_id" not-null="true" />
         </many-to-one>
         <property name="saida" type="timestamp">
-            <column name="saida" length="19" />
+            <column name="saida" length="19" not-null="true" />
         </property>
         <property name="chegada" type="timestamp">
-            <column name="chegada" length="19" />
+            <column name="chegada" length="19" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

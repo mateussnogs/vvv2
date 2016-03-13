@@ -1,45 +1,53 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Mar 2, 2016 5:55:12 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 13-Mar-2016 14:26:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="model.Funcionario" table="Funcionario" catalog="vvv" optimistic-lock="version">
-        <id name="idFuncionario" type="java.lang.Integer">
-            <column name="idFuncionario" />
+    <class name="model.Funcionario" table="funcionario" catalog="vvv" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
             <generator class="identity" />
         </id>
         <property name="nome" type="string">
-            <column name="nome" length="45" />
+            <column name="nome" length="45" not-null="true" />
         </property>
         <property name="endereco" type="string">
-            <column name="endereco" length="45" />
+            <column name="endereco" length="45" not-null="true" />
         </property>
         <property name="telefone" type="string">
-            <column name="telefone" length="45" />
+            <column name="telefone" length="45" not-null="true" />
         </property>
-        <property name="cargo" type="string">
-            <column name="cargo" length="45" />
+        <property name="cargo" type="int">
+            <column name="cargo" not-null="true" />
         </property>
-        <property name="password" type="string">
-            <column name="password" length="45" />
+        <property name="password" type="binary">
+            <column name="password" not-null="true" />
         </property>
         <property name="userName" type="string">
-            <column name="userName" length="45" />
+            <column name="userName" length="45" not-null="true" unique="true" />
         </property>
-        <property name="cpf" type="java.lang.Integer">
-            <column name="cpf" />
+        <property name="cpf" type="int">
+            <column name="cpf" not-null="true" unique="true" />
         </property>
-        <set name="trabalhaPontoDeVendas" table="TrabalhaPontoDeVenda" inverse="true" lazy="true" fetch="select">
+        <set name="reservas" table="reserva" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idFuncionario" not-null="true" />
-            </key>
-            <one-to-many class="model.TrabalhaPontoDeVenda" />
-        </set>
-        <set name="reservas" table="Reserva" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="idFuncionario" />
+                <column name="funcionario_id" not-null="true" />
             </key>
             <one-to-many class="model.Reserva" />
+        </set>
+        <set name="pontodevendaFuncionarios" table="pontodevenda_funcionario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Funcionario_id" not-null="true" />
+            </key>
+            <one-to-many class="model.PontodevendaFuncionario" />
+        </set>
+        <set name="pontodevendas" table="funcionario_has_pontodevenda" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="Funcionario_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="model.Pontodevenda">
+                <column name="PontoDeVenda_id" not-null="true" />
+            </many-to-many>
         </set>
     </class>
 </hibernate-mapping>

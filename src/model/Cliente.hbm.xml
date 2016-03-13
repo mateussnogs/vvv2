@@ -1,31 +1,31 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Mar 2, 2016 5:55:12 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 13-Mar-2016 14:26:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="model.Cliente" table="Cliente" catalog="vvv" optimistic-lock="version">
-        <id name="idCliente" type="java.lang.Integer">
-            <column name="idCliente" />
+    <class name="model.Cliente" table="cliente" catalog="vvv" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
             <generator class="identity" />
         </id>
         <property name="nome" type="string">
-            <column name="nome" length="45" />
+            <column name="nome" length="45" not-null="true" />
         </property>
-        <property name="idade" type="java.lang.Integer">
-            <column name="idade" />
+        <property name="idade" type="int">
+            <column name="idade" not-null="true" />
         </property>
-        <property name="cpf" type="java.lang.Integer">
-            <column name="cpf" />
+        <property name="cpf" type="int">
+            <column name="cpf" not-null="true" unique="true" />
         </property>
         <property name="telefone" type="string">
-            <column name="telefone" length="45" />
+            <column name="telefone" length="45" not-null="true" />
         </property>
         <property name="profissao" type="string">
             <column name="profissao" length="45" />
         </property>
-        <set name="reservas" table="Reserva" inverse="true" lazy="true" fetch="select">
+        <set name="reservas" table="reserva" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idCliente" />
+                <column name="client_id" not-null="true" />
             </key>
             <one-to-many class="model.Reserva" />
         </set>

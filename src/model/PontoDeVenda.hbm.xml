@@ -1,30 +1,38 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Mar 2, 2016 5:55:12 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 13-Mar-2016 14:26:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="model.PontoDeVenda" table="PontoDeVenda" catalog="vvv" optimistic-lock="version">
-        <id name="idPontoDeVenda" type="java.lang.Integer">
-            <column name="idPontoDeVenda" />
+    <class name="model.Pontodevenda" table="pontodevenda" catalog="vvv" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
             <generator class="identity" />
         </id>
         <property name="endereco" type="string">
-            <column name="endereco" length="45" />
+            <column name="endereco" length="45" not-null="true" />
         </property>
         <property name="nome" type="string">
-            <column name="nome" length="45" />
+            <column name="nome" length="45" not-null="true" />
         </property>
         <property name="cnpj" type="string">
-            <column name="cnpj" length="45" />
+            <column name="cnpj" length="45" not-null="true" unique="true" />
         </property>
         <property name="telefone" type="string">
-            <column name="telefone" length="45" />
+            <column name="telefone" length="45" not-null="true" />
         </property>
-        <set name="trabalhaPontoDeVendas" table="TrabalhaPontoDeVenda" inverse="true" lazy="true" fetch="select">
+        <set name="funcionarios" table="funcionario_has_pontodevenda" inverse="false" lazy="true" fetch="select">
             <key>
-                <column name="idPontoDeVenda" not-null="true" />
+                <column name="PontoDeVenda_id" not-null="true" />
             </key>
-            <one-to-many class="model.TrabalhaPontoDeVenda" />
+            <many-to-many entity-name="model.Funcionario">
+                <column name="Funcionario_id" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="pontodevendaFuncionarios" table="pontodevenda_funcionario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PontoDeVenda_id" not-null="true" />
+            </key>
+            <one-to-many class="model.PontodevendaFuncionario" />
         </set>
     </class>
 </hibernate-mapping>

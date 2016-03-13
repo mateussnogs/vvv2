@@ -6,18 +6,18 @@
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/vvv?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">1234</property>
+    <property name="hibernate.connection.username">java</property>
+    <property name="hibernate.connection.password">java</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <mapping resource="model/Escala.hbm.xml"/>
-    <mapping resource="model/PontoDeVenda.hbm.xml"/>
-    <mapping resource="model/Reserva.hbm.xml"/>
-    <mapping resource="model/Modal.hbm.xml"/>
-    <mapping resource="model/TrabalhaPontoDeVenda.hbm.xml"/>
-    <mapping resource="model/Cliente.hbm.xml"/>
     <mapping resource="model/Funcionario.hbm.xml"/>
+    <mapping resource="model/Escala.hbm.xml"/>
+    <mapping resource="model/Modal.hbm.xml"/>
     <mapping resource="model/Cidade.hbm.xml"/>
+    <mapping resource="model/Pontodevenda.hbm.xml"/>
+    <mapping resource="model/Reserva.hbm.xml"/>
+    <mapping resource="model/Cliente.hbm.xml"/>
     <mapping resource="model/Transportadora.hbm.xml"/>
     <mapping resource="model/Viagem.hbm.xml"/>
+    <mapping resource="model/PontodevendaFuncionario.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
