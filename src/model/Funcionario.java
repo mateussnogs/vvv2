@@ -1,5 +1,5 @@
 package model;
-// Generated 13-Mar-2016 14:26:24 by Hibernate Tools 4.3.1
+// Generated 13-Mar-2016 17:32:36 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -23,7 +23,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name="funcionario"
     ,catalog="vvv"
-    , uniqueConstraints = {@UniqueConstraint(columnNames="cpf"), @UniqueConstraint(columnNames="userName")} 
+    , uniqueConstraints = {@UniqueConstraint(columnNames="cpf"), @UniqueConstraint(columnNames="usuario")} 
 )
 public class Funcionario  implements java.io.Serializable {
 
@@ -33,9 +33,9 @@ public class Funcionario  implements java.io.Serializable {
      private String endereco;
      private String telefone;
      private int cargo;
-     private byte[] password;
-     private String userName;
-     private int cpf;
+     private byte[] senha;
+     private String usuario;
+     private String cpf;
      private Set<Reserva> reservas = new HashSet<Reserva>(0);
      private Set<PontodevendaFuncionario> pontodevendaFuncionarios = new HashSet<PontodevendaFuncionario>(0);
      private Set<Pontodevenda> pontodevendas = new HashSet<Pontodevenda>(0);
@@ -44,22 +44,22 @@ public class Funcionario  implements java.io.Serializable {
     }
 
 	
-    public Funcionario(String nome, String endereco, String telefone, int cargo, byte[] password, String userName, int cpf) {
+    public Funcionario(String nome, String endereco, String telefone, int cargo, byte[] senha, String usuario, String cpf) {
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
         this.cargo = cargo;
-        this.password = password;
-        this.userName = userName;
+        this.senha = senha;
+        this.usuario = usuario;
         this.cpf = cpf;
     }
-    public Funcionario(String nome, String endereco, String telefone, int cargo, byte[] password, String userName, int cpf, Set<Reserva> reservas, Set<PontodevendaFuncionario> pontodevendaFuncionarios, Set<Pontodevenda> pontodevendas) {
+    public Funcionario(String nome, String endereco, String telefone, int cargo, byte[] senha, String usuario, String cpf, Set<Reserva> reservas, Set<PontodevendaFuncionario> pontodevendaFuncionarios, Set<Pontodevenda> pontodevendas) {
        this.nome = nome;
        this.endereco = endereco;
        this.telefone = telefone;
        this.cargo = cargo;
-       this.password = password;
-       this.userName = userName;
+       this.senha = senha;
+       this.usuario = usuario;
        this.cpf = cpf;
        this.reservas = reservas;
        this.pontodevendaFuncionarios = pontodevendaFuncionarios;
@@ -119,32 +119,32 @@ public class Funcionario  implements java.io.Serializable {
     }
 
     
-    @Column(name="password", nullable=false)
-    public byte[] getPassword() {
-        return this.password;
+    @Column(name="senha", nullable=false)
+    public byte[] getSenha() {
+        return this.senha;
     }
     
-    public void setPassword(byte[] password) {
-        this.password = password;
-    }
-
-    
-    @Column(name="userName", unique=true, nullable=false, length=45)
-    public String getUserName() {
-        return this.userName;
-    }
-    
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setSenha(byte[] senha) {
+        this.senha = senha;
     }
 
     
-    @Column(name="cpf", unique=true, nullable=false)
-    public int getCpf() {
+    @Column(name="usuario", unique=true, nullable=false, length=45)
+    public String getUsuario() {
+        return this.usuario;
+    }
+    
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    
+    @Column(name="cpf", unique=true, nullable=false, length=11)
+    public String getCpf() {
         return this.cpf;
     }
     
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

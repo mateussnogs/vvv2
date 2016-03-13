@@ -2,15 +2,15 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="vvv"/>
-  <table-filter match-name="pontodevenda"/>
-  <table-filter match-name="viagem"/>
-  <table-filter match-name="escala"/>
-  <table-filter match-name="transportadora"/>
-  <table-filter match-name="funcionario_has_pontodevenda"/>
   <table-filter match-name="cidade"/>
   <table-filter match-name="modal"/>
-  <table-filter match-name="pontodevenda_funcionario"/>
-  <table-filter match-name="funcionario"/>
+  <table-filter match-name="transportadora"/>
   <table-filter match-name="reserva"/>
   <table-filter match-name="cliente"/>
+  <table-filter match-name="funcionario"/>
+  <table-filter match-name="pontodevenda"/>
+  <table-filter match-name="escala"/>
+  <table-filter match-name="viagem"/>
+  <table-filter match-name="funcionario_has_pontodevenda"/>
+  <table-filter match-name="pontodevenda_funcionario"/>
 </hibernate-reverse-engineering>
