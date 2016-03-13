@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vvv2;
+package VVV;
 
 /**
  *
  * @author mateus
  */
-public class VVV2 {
-
+public class System {
     /**
      * @param args the command line arguments
      */
