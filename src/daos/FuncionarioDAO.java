@@ -1,18 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package daos;
 
 import java.util.List;
-import java.util.logging.Logger;
+import java.util.logging.Level;
+import org.hibernate.HibernateException;
 
-public class FuncionarioDAO extends DOA{
-    public static final Logger logger = Logger.getLogger(FuncionarioDAO.class.getName());
-    
+public class FuncionarioDAO extends DOA{    
     public static List encontrarFuncionarioPorUsuario(String usuario){
-        session.beginTransaction();
-        return session.createQuery("select f from Funcionario as funcionario where funcionario.usuario = '" + usuario + "'").list();
+        List l = null;
+                
+        try{
+            session.beginTransaction();
+            l = session
+                    .createQuery("select f from Funcionario as f where f.usuario = '" + usuario + "'")
+                    .list();
+            
+            session.getTransaction().commit();
+        }catch(HibernateException e){
+            LOGGER.log(Level.SEVERE, null, e);
+            session.getTransaction().rollback();
+        }
+        
+        return l;
     }
 }

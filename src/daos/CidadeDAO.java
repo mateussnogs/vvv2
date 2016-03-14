@@ -1,35 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package daos;
 
-import java.util.List;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
+import static daos.DOA.session;
+import java.util.logging.Level;
 
-/**
- *
- * @author mateus
- */
-public class CidadeDAO {
-    public CidadeDAO() {
-        
-    }
-    
-    public static String getNomeCidadeById(int id) {
+public class CidadeDAO extends DOA{    
+    public static String encontrarNomeDeCidadePorId(int id) {
         String nomeCidade = null;
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        try{
             session.beginTransaction();
-            Query q = session.createQuery("Select c.nome from Cidade as c where c.id = " + id);
-            List resultList = q.list();
-            nomeCidade = resultList.get(0).toString();
+            nomeCidade = session
+                    .createQuery("Select c.nome from Cidade as c where c.id = " + id)
+                    .list().get(0).toString();
+            
             session.getTransaction().commit();
-        } catch (HibernateException he) {
-            he.printStackTrace();
+        }catch(RuntimeException e){
+            LOGGER.log(Level.SEVERE, null, e);
+            session.getTransaction().rollback();
         }
 
         return nomeCidade;

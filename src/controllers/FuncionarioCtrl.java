@@ -2,6 +2,7 @@ package controllers;
 
 import daos.FuncionarioDAO;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,8 +12,15 @@ import lib.jBCrypt.BCrypt;
 
 public class FuncionarioCtrl {
     
-    public static final Logger logger = Logger.getLogger(FuncionarioCtrl.class.getName());
-    public static Funcionario logado = null;
+    public static final int GERENTE     = 0;
+    public static final int FUNCIONARIO = 1;
+    
+    private static final Logger LOGGER = Logger.getLogger(FuncionarioCtrl.class.getName());
+    private static Funcionario  logado = null;
+    
+    public static Funcionario getUsuarioLogado() {
+        return logado;
+    }
     
     public static boolean verificarExistenciaFuncionario(String user) {
         List query = FuncionarioDAO.encontrarFuncionarioPorUsuario(user);
@@ -37,18 +45,22 @@ public class FuncionarioCtrl {
         ));
     }
     
-    public static Boolean login(String usuario, String senha) throws UnsupportedEncodingException{
+    public static Boolean login(String usuario, String senha){
         Funcionario funcionario = FuncionarioCtrl.encontrarFuncionarioPorUsuario(usuario);
         
         if(FuncionarioCtrl.logado == null){
-            if(funcionario != null && BCrypt.checkpw(senha, new String(funcionario.getSenha(), "UTF8"))){
+            if(funcionario != null && BCrypt.checkpw(senha, new String(funcionario.getSenha(), StandardCharsets.UTF_8))){
                 FuncionarioCtrl.logado = funcionario;
                 return true;
             }
         }else{
-            logger.log(Level.SEVERE, "Usuário já logado");
+            LOGGER.log(Level.SEVERE, "Usuário já logado");
         }
         
         return false;
+    }
+    
+    public static void logout(){
+        FuncionarioCtrl.logado = null;
     }
 }

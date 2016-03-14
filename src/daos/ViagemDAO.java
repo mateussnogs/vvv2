@@ -1,68 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package daos;
 
+import static daos.DOA.LOGGER;
+import static daos.DOA.session;
 import java.util.List;
+import java.util.logging.Level;
 import model.Viagem;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-/**
- *
- * @author mateus
- */
-public class ViagemDAO {
+public class ViagemDAO extends DOA{
     
-    public static List getViagens() {
+    public static List encontrarViagens() {
         List resultList = null;
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            Query q = session.createQuery("FROM Viagem");
-            resultList = q.list();
-            //displayViagens(resultList);
-            session.getTransaction().commit();
-        } catch (HibernateException he) {
-            he.printStackTrace();
-        }
         
-        return resultList;
-    }
-    
-    public static Viagem getViagemById(int id) {
-        List resultList = null;
-        Viagem viagem = new Viagem();
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Query q = session.createQuery("SELECT FROM Viagem as v WHERE v.id = " + id);
-            resultList = q.list();
-            viagem = (Viagem)resultList.get(0);
+            resultList = session
+                    .createQuery("FROM Viagem")
+                    .list();
             
-        } catch (HibernateException he) {
-            he.printStackTrace();
-        }
-        return viagem;
-    }
-    
-    public static List getVagasTotaisViagem(int viagemId) {
-        List resultList = null;
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            Query q = session.createQuery("SELECT m.vagasDisponiveis FROM Viagem as v, Modal as m, Escala as e WHERE v.id = " + viagemId + " and v.id = e.viagem.id and e.modal.idModal = m.idModal"); 
-            resultList = q.list();
-
-        } catch (HibernateException he) {
-            he.printStackTrace();
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            LOGGER.log(Level.SEVERE, null, e);
+            session.getTransaction().rollback();
         }
         
         return resultList;
-        
     }
     
+    public static List encontrarViagemPorId(int id) {
+        List resultList = null;
+        
+        try {
+            session.beginTransaction();
+            resultList = session
+                    .createQuery("SELECT FROM Viagem as v WHERE v.id = " + id)
+                    .list();
+            
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            LOGGER.log(Level.SEVERE, null, e);
+            session.getTransaction().rollback();
+        }
+        
+        return resultList;
+    }    
 }

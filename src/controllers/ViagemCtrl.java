@@ -6,11 +6,8 @@
 package controllers;
 
 import daos.CidadeDAO;
-import daos.EscalaDAO;
-import daos.ModalDAO;
-import daos.ViagemDAO;
 import java.util.List;
-import java.util.Vector;
+import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 import model.Escala;
 import model.Viagem;
@@ -20,99 +17,58 @@ import model.Viagem;
  * @author mateus
  */
 public class ViagemCtrl {
-    //True se todos os modais da viagem tiverem pelo menos 1 vaga
-    //False caso contrário.
-    public boolean checkVagasDisponiveis(int viagemId) {
-        List resultList = ViagemDAO.getVagasTotaisViagem(viagemId);
-        if (resultList != null) {            
-            for (int i = 0; i < resultList.size(); i++) {
-                int vagas = (int)resultList.get(i);
-                if (vagas == 0)
-                    return false;
+    public void visualizarViagemSelecionada(Viagem viagem, javax.swing.JTable viagemSelectedRow) {        
+        String[] cabecalho = {"Id", "DataSaída", "DataChegada", "CidadeOrigem", "CidadeChegada", "Valor"};
+        String[][] dados = {
+            {
+                viagem.getId().toString(),
+                viagem.getSaida().toString(),
+                viagem.getChegada().toString(),
+                viagem.getCidadeByCidadeOrigemId().getNome(),
+                viagem.getCidadeByCidadeDestinoId().getNome(),
+                Float.toString(viagem.getValor())
             }
-        }
-        else {
-            return false;
-        }
-        return true;
-        
+        };
+
+        viagemSelectedRow.setModel(new DefaultTableModel(dados, cabecalho));
     }
     
-    public void displayViagemSelected(Viagem v, javax.swing.JTable viagemSelectedRow) {        
-        Vector<String> tableHeaders = new Vector<String>();
-        Vector tableData = new Vector();
-        tableHeaders.add("IdViagem");
-        tableHeaders.add("DataSaída");
-        tableHeaders.add("DataChegada");
-        tableHeaders.add("CidadeOrigem");
-        tableHeaders.add("CidadeChegada");
-        tableHeaders.add("Valor");
-
-        Vector<Object> oneRow = new Vector<Object>();
-        oneRow.add(v.getId());
-        oneRow.add(v.getSaida());
-        oneRow.add(v.getChegada());
-
-        oneRow.add(CidadeDAO.getNomeCidadeById(v.getCidadeByCidadeOrigemId().getId()));
-        oneRow.add(CidadeDAO.getNomeCidadeById(v.getCidadeByCidadeDestinoId().getId()));
-        oneRow.add(v.getValor());
-        tableData.add(oneRow);
-
-        viagemSelectedRow.setModel(new DefaultTableModel(tableData, tableHeaders));
+    public void visualizarEscalasViagem(Viagem viagem, javax.swing.JTable escalasTable) {
+        Set<Escala> escalas = viagem.getEscalas();
         
-        //return viagemSelectedRow;
-    }
-    
-    public void displayEscalasViagem(Viagem viagemSelecionada, javax.swing.JTable escalasTable) {
+        String[] cabecalho = {"Modal", "DataSaída", "DataChegada", "CidadeOrigem", "CidadeChegada"};
+        String[][] dados = new String[escalas.size()][5];
         
-        List escalas = EscalaDAO.getEscalasByViagemId(viagemSelecionada.getId());
-        Vector<String> tableHeaders = new Vector<String>();
-        Vector tableData = new Vector();
-        tableHeaders.add("Modal");
-        tableHeaders.add("DataSaída");
-        tableHeaders.add("DataChegada");
-        tableHeaders.add("CidadeOrigem");
-        tableHeaders.add("CidadeChegada");
-
-        for (Object o : escalas) {
-            Escala e = (Escala) o;
-            Vector<Object> oneRow = new Vector<Object>();
-            oneRow.add(ModalDAO.getNomeModalById(e.getModal().getIdModal()));
-            oneRow.add(e.getSaida());
-            oneRow.add(e.getChegada());
-
-            oneRow.add(CidadeDAO.getNomeCidadeById(e.getCidadeByCidadeId().getId()));
-            oneRow.add(CidadeDAO.getNomeCidadeById(e.getCidadeByCidadeId1().getId()));
-            tableData.add(oneRow);
+        int counter = 0;
+        for (Escala e : escalas) {
+            dados[counter][0] = e.getModal().getTipoModal();
+            dados[counter][1] = e.getSaida().toString();
+            dados[counter][2] = e.getChegada().toString();
+            dados[counter][3] = e.getCidadeByCidadeOrigemId().getNome();
+            dados[counter][4] = e.getCidadeByCidadeDestinoId().getNome();
+            
+            counter++;
         }
 
-        escalasTable.setModel(new DefaultTableModel(tableData, tableHeaders));       
+        escalasTable.setModel(new DefaultTableModel(dados, cabecalho));       
     }
     
-    public void displayViagens(List resultList, javax.swing.JTable table) {
-        Vector<String> tableHeaders = new Vector<String>();
-        Vector tableData = new Vector();
-        tableHeaders.add("IdViagem");
-        tableHeaders.add("DataSaída");
-        tableHeaders.add("DataChegada");
-        tableHeaders.add("CidadeOrigem");
-        tableHeaders.add("CidadeChegada");
-        tableHeaders.add("Valor");
+    public void displayViagens(List<Viagem> listaViagens, javax.swing.JTable table) {        
+        String[] cabecalho = {"Id", "DataSaída", "DataChegada", "CidadeOrigem", "CidadeChegada", "Valor"};
+        String[][] dados = new String[listaViagens.size()][6];
 
-        for (Object o : resultList) {
-            Viagem v = (Viagem) o;
-            Vector<Object> oneRow = new Vector<Object>();
-            oneRow.add(v.getId());
-            oneRow.add(v.getSaida());
-            oneRow.add(v.getChegada());
-
-            oneRow.add(CidadeDAO.getNomeCidadeById(v.getCidadeByCidadeOrigemId().getId()));
-            oneRow.add(CidadeDAO.getNomeCidadeById(v.getCidadeByCidadeDestinoId().getId()));
-            oneRow.add(v.getValor());
-            tableData.add(oneRow);
-
+        int counter = 0;
+        for (Viagem viagem : listaViagens) {
+            dados[counter][0] = viagem.getId().toString();
+            dados[counter][1] = viagem.getSaida().toString();
+            dados[counter][2] = viagem.getChegada().toString();
+            dados[counter][3] = viagem.getCidadeByCidadeOrigemId().getNome();
+            dados[counter][4] = viagem.getCidadeByCidadeDestinoId().getNome();
+            dados[counter][5] = Float.toString(viagem.getValor());
+                        
+            counter++;            
         }
-        table.setModel(new DefaultTableModel(tableData, tableHeaders));
+        table.setModel(new DefaultTableModel(dados, cabecalho));
 
     }
 }

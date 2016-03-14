@@ -1,47 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package daos;
 
+import static daos.DOA.LOGGER;
+import static daos.DOA.session;
 import java.util.List;
-import model.Cliente;
+import java.util.logging.Level;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
-/**
- *
- * @author mateus
- */
-public class ClienteDAO {
-    
-    public ClienteDAO() {
-        
-    }
-    
-    public static void CadastrarCliente(Cliente c) {
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.save(c);
-            session.getTransaction().commit();
-        } catch (HibernateException he) {
-            he.printStackTrace();
-        }
-    }
-    
-    public static List getClienteByUserNameAndPass(String user, String pass) {
+public class ClienteDAO extends DOA{    
+    public static List encontrarClientePorCpf(String cpf) {
         List resultList = null;
+        
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Query q = session.createQuery("select c from Cliente as c where c.userName = " + "'" + user.toString() + "'" + " and c.password = " + "'" + pass.toString() + "'");
-            resultList = q.list();
-
-        } catch (HibernateException he) {
-            he.printStackTrace();
+            resultList = session
+                    .createQuery("select c from Cliente as c where c.cpf = " + cpf)
+                    .list();
+            
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            LOGGER.log(Level.SEVERE, null, e);
+            session.getTransaction().rollback();
         }
         
         return resultList;

@@ -1,33 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package daos;
 
 import java.util.List;
+import java.util.logging.Level;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
-/**
- *
- * @author mateus
- */
-public class EscalaDAO {
-    public EscalaDAO() {
-        
-    }
-    
-    public static List getEscalasByViagemId(int id) {
+public class EscalaDAO extends DOA{
+    public static List encontrarEscalaPorViagemId(int id) {
         List resultList = null;
+        
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Query q = session.createQuery("Select from Escala as e where e.viagem.id = " + id);
-            resultList = q.list();            
-        } catch (HibernateException he) {
-            he.printStackTrace();
+            resultList = session
+                    .createQuery("Select from Escala as e where e.viagem.id = " + id)
+                    .list();
+            
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            LOGGER.log(Level.SEVERE, null, e);
+            session.getTransaction().rollback();
         }
 
         return resultList;

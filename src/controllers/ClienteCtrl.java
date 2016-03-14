@@ -21,22 +21,19 @@ public class ClienteCtrl {
     }    
     
     //Checa se o cliente já está cadastrado
-    public boolean checkUserRegistered(String user, String pass) {
-        List resultList = ClienteDAO.getClienteByUserNameAndPass(user, pass);
-        if (resultList != null && resultList.size() == 0) {
-            return false;
-        } else {
-            return true;
-        }
+    public boolean verificarExistenciaCliente(String cpf) {
+        List resultList = ClienteDAO.encontrarClientePorCpf(cpf);
+        
+        return !(resultList != null && resultList.isEmpty());
     }
     
-    public void cadastrarCliente(Cliente cliente) {
-        ClienteDAO.CadastrarCliente(cliente);
+    public Boolean cadastrarCliente(String nome, int idade, String cpf, String telefone, String profissao) {
+        return ClienteDAO.salvar(new Cliente(nome, idade, cpf, telefone, profissao, null));
     }
     
-    public Cliente getClienteByUserPass(String user, String pass) {
-        Cliente c = (Cliente)ClienteDAO.getClienteByUserNameAndPass(user, pass).get(0);
-        return c;
+    public Cliente encontrarClientePorCpf(String cpf) {
+        List query = ClienteDAO.encontrarClientePorCpf(cpf);
+        return query == null? null : (Cliente)(query.get(0));
     }
     
 }

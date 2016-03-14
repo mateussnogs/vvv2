@@ -1,5 +1,5 @@
 package model;
-// Generated 13-Mar-2016 17:32:36 by Hibernate Tools 4.3.1
+// Generated 13-Mar-2016 22:50:52 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -28,7 +28,7 @@ public class Cliente  implements java.io.Serializable {
      private Integer id;
      private String nome;
      private int idade;
-     private int cpf;
+     private String cpf;
      private String telefone;
      private String profissao;
      private Set<Reserva> reservas = new HashSet<Reserva>(0);
@@ -37,13 +37,13 @@ public class Cliente  implements java.io.Serializable {
     }
 
 	
-    public Cliente(String nome, int idade, int cpf, String telefone) {
+    public Cliente(String nome, int idade, String cpf, String telefone) {
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
         this.telefone = telefone;
     }
-    public Cliente(String nome, int idade, int cpf, String telefone, String profissao, Set<Reserva> reservas) {
+    public Cliente(String nome, int idade, String cpf, String telefone, String profissao, Set<Reserva> reservas) {
        this.nome = nome;
        this.idade = idade;
        this.cpf = cpf;
@@ -85,12 +85,12 @@ public class Cliente  implements java.io.Serializable {
     }
 
     
-    @Column(name="cpf", unique=true, nullable=false)
-    public int getCpf() {
+    @Column(name="cpf", unique=true, nullable=false, length=11)
+    public String getCpf() {
         return this.cpf;
     }
     
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

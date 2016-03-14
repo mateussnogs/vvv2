@@ -3,30 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views;
+package Tela.Secundaria;
 
+import Tela.Principal.TelaDeMenu;
 import controllers.ClienteCtrl;
+import javax.swing.JOptionPane;
 import model.Cliente;
-import model.Funcionario;
 
 /**
  *
  * @author mateus
  */
 public class TelaCadastroCliente extends javax.swing.JFrame {
-
     public Cliente cliente;
-    public Funcionario funcionario;
     public ClienteCtrl clienteCtrl = new ClienteCtrl();
-    public TelaFuncionario telaFuncionario;
-    public TelaGerente telaGerente;
 
     /**
      * Creates new form TelaCadastroCliente
      */
-    public TelaCadastroCliente(TelaFuncionario tf, TelaGerente tg) {
-        telaFuncionario = tf;
-        telaGerente = tg;
+    public TelaCadastroCliente() {
         initComponents();
     }
 
@@ -120,7 +115,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                 .addGap(42, 42, 42))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(profissao, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -178,12 +173,12 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
             return false;
         else
             return true;
-    }
+    } 
     private void cadastrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarButtonActionPerformed
         if (CamposPreenchidos()) {
-            cliente = new Cliente(nome.getText(), Integer.parseInt(idade.getText()), Integer.parseInt(cpf.getText()),
-                    telefone.getText(), profissao.getText(), null);
-            clienteCtrl.cadastrarCliente(cliente);
+            if(!clienteCtrl.cadastrarCliente(nome.getText(), Integer.parseInt(idade.getText()), cpf.getText(), telefone.getText(), profissao.getText())){
+                JOptionPane.showMessageDialog(this, "Senha ou Usuario inválidos.");
+            }
         }
         else 
             System.out.println("Preencha todos os campos");
@@ -191,11 +186,7 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
 
     private void voltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarButtonActionPerformed
         this.setVisible(false);
-        if (telaGerente == null) {
-            telaFuncionario.setVisible(true);
-        } else {
-            telaGerente.setVisible(true);
-        }
+        TelaDeMenu.mostrar();
     }//GEN-LAST:event_voltarButtonActionPerformed
 
     /**
