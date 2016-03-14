@@ -1,44 +1,34 @@
 package Tela.Principal;
 
+import Tela.Tela;
 import Tela.Secundaria.TelaCadastroCliente;
 import Tela.Secundaria.TelaCadastroFuncionario;
 import Tela.Secundaria.TelaViagens;
 import controllers.FuncionarioCtrl;
+import java.awt.Point;
 
-import javax.swing.JFrame;
-
-/**
- *
- * @author mateus
- */
-public class TelaDeMenu extends JFrame {
-    private static final TelaDeMenu tela = new TelaDeMenu();
+public class TelaDeMenu extends Tela {
+    private static TelaDeMenu TELA = null;
     
-    public static void mostrar(){        
-        tela.setVisible(true);
-        tela.redesenhar();
-    }
-    
-    public static void esconder(){
-        tela.setVisible(false);
+    public static TelaDeMenu instancia() {
+        if(TELA == null){
+            TELA = new TelaDeMenu();
+        }
+        
+        return TELA;
     }
     
     public TelaCadastroFuncionario telaCadastroFuncionario;
     public TelaCadastroCliente     telaCadastroCliente;
     public TelaViagens             telaViagens;
     
-    /**
-     * Creates new form TelaGerente
-     */
-    private TelaDeMenu() {        
+    private TelaDeMenu() {
         initComponents();
         
         telaCadastroFuncionario = new TelaCadastroFuncionario();
         telaCadastroCliente     = new TelaCadastroCliente();
         telaViagens             = new TelaViagens();
-    }
-    
-    public void redesenhar(){
+        
         String cargo;
         
         if(FuncionarioCtrl.getUsuarioLogado().getCargo() == FuncionarioCtrl.FUNCIONARIO){
@@ -117,7 +107,7 @@ public class TelaDeMenu extends JFrame {
             painelGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelGerenteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cadastrarFuncionarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cadastrarFuncionarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                 .addContainerGap())
         );
         painelGerenteLayout.setVerticalGroup(
@@ -136,9 +126,9 @@ public class TelaDeMenu extends JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(179, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(painelGerente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cadastrarClienteButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -151,7 +141,7 @@ public class TelaDeMenu extends JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(nomeDeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -169,66 +159,22 @@ public class TelaDeMenu extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastrarFuncionarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarFuncionarioButtonActionPerformed
-        this.setVisible(false);
-        telaCadastroFuncionario.setVisible(true);
+        this.abrirTelaRelativa(telaCadastroFuncionario);
     }//GEN-LAST:event_cadastrarFuncionarioButtonActionPerformed
 
     private void cadastrarClienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarClienteButtonActionPerformed
-        this.setVisible(false);
-        telaCadastroCliente.setVisible(true);
+        this.abrirTelaRelativa(telaCadastroCliente);
     }//GEN-LAST:event_cadastrarClienteButtonActionPerformed
 
     private void irViagensButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irViagensButtonActionPerformed
-        this.setVisible(false);
-        telaViagens.setVisible(true);
+        this.abrirTelaRelativa(telaViagens);
     }//GEN-LAST:event_irViagensButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        tela.setVisible(false);
         FuncionarioCtrl.logout();
-        TelaDeLogin.mostrar();
+        this.abrirTelaRelativa(TelaDeLogin.instancia());
+        TELA = null;
     }//GEN-LAST:event_logoutButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaDeMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaDeMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaDeMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaDeMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cadastrarClienteButton;

@@ -5,25 +5,19 @@
  */
 package Tela.Principal;
 
+import Tela.Tela;
 import controllers.FuncionarioCtrl;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
-import model.Funcionario;
-import javax.swing.JFrame;
 
 /**
  *
  * @author mateus
  */
-public class TelaDeLogin extends JFrame {
-    private static final TelaDeLogin tela = new TelaDeLogin();
-    
-    public static void mostrar(){        
-        tela.setVisible(true);
-    }
-    
-    public static void esconder(){
-        tela.setVisible(false);
+public class TelaDeLogin extends Tela {
+    private static final TelaDeLogin TELA = new TelaDeLogin();
+
+    public static TelaDeLogin instancia() {
+        return TELA;
     }
     
     /**
@@ -54,12 +48,6 @@ public class TelaDeLogin extends JFrame {
         jLabel1.setText("Usuário");
 
         jLabel2.setText("Senha");
-
-        usuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usuarioActionPerformed(evt);
-            }
-        });
 
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -119,47 +107,15 @@ public class TelaDeLogin extends JFrame {
         this.usuario.setText("");
         this.senha.setText("");
         
-        TelaDeLogin.esconder();
-        TelaDeMenu.mostrar();
+        this.abrirTelaRelativa(TelaDeMenu.instancia());
     }//GEN-LAST:event_loginButtonActionPerformed
-
-    private void usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usuarioActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaDeLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaDeLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaDeLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaDeLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                tela.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            TELA.mostrar();
         });
     }
 

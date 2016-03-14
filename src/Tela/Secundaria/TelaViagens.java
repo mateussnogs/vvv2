@@ -5,6 +5,7 @@
  */
 package Tela.Secundaria;
 
+import Tela.Tela;
 import controllers.ViagemCtrl;
 import daos.ViagemDAO;
 
@@ -12,7 +13,7 @@ import daos.ViagemDAO;
  *
  * @author mateus
  */
-public class TelaViagens extends javax.swing.JFrame {
+public class TelaViagens extends Tela {
     public ViagemCtrl viagemCtrl = new ViagemCtrl();
     /**
      * Creates new form TelaViagens
