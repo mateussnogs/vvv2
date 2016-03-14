@@ -27,7 +27,12 @@ public class Tela extends JFrame{
     
     protected void abrirTelaRelativa(Tela tela){
         this.esconder();
-        tela.mostrar(this.getLocation());
+        
+        Point pos = this.getLocation();
+        pos.x     += (this.getWidth() / 2) - (tela.getWidth() / 2);
+        pos.y     += (this.getHeight() / 2) - (tela.getHeight() / 2);
+        
+        tela.mostrar(pos);
     }
     
     public final void centralizar(int monitorId){

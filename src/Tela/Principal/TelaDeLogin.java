@@ -8,6 +8,8 @@ package Tela.Principal;
 import Tela.Tela;
 import controllers.FuncionarioCtrl;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -114,6 +116,13 @@ public class TelaDeLogin extends Tela {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+         try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } 
+        catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            System.exit(-1);
+        }
+         
         java.awt.EventQueue.invokeLater(() -> {
             TELA.mostrar();
         });

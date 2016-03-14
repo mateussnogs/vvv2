@@ -5,7 +5,6 @@ import Tela.Secundaria.TelaCadastroCliente;
 import Tela.Secundaria.TelaCadastroFuncionario;
 import Tela.Secundaria.TelaViagens;
 import controllers.FuncionarioCtrl;
-import java.awt.Point;
 
 public class TelaDeMenu extends Tela {
     private static TelaDeMenu TELA = null;

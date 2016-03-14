@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import daos.CidadeDAO;
+import daos.ViagemDAO;
 import java.util.List;
 import java.util.Set;
 import javax.swing.table.DefaultTableModel;
@@ -16,27 +16,15 @@ import model.Viagem;
  *
  * @author mateus
  */
-public class ViagemCtrl {
-    public void visualizarViagemSelecionada(Viagem viagem, javax.swing.JTable viagemSelectedRow) {        
-        String[] cabecalho = {"Id", "DataSaída", "DataChegada", "CidadeOrigem", "CidadeChegada", "Valor"};
-        String[][] dados = {
-            {
-                viagem.getId().toString(),
-                viagem.getSaida().toString(),
-                viagem.getChegada().toString(),
-                viagem.getCidadeByCidadeOrigemId().getNome(),
-                viagem.getCidadeByCidadeDestinoId().getNome(),
-                Float.toString(viagem.getValor())
-            }
-        };
-
-        viagemSelectedRow.setModel(new DefaultTableModel(dados, cabecalho));
+public class ViagemCtrl {    
+    public DefaultTableModel tabelaDeViagens(){
+        return this.construirTabelaViagem(ViagemDAO.pegarListaDeViagens());
     }
     
-    public void visualizarEscalasViagem(Viagem viagem, javax.swing.JTable escalasTable) {
+    private DefaultTableModel construirTabelaEscala(Viagem viagem) {
         Set<Escala> escalas = viagem.getEscalas();
         
-        String[] cabecalho = {"Modal", "DataSaída", "DataChegada", "CidadeOrigem", "CidadeChegada"};
+        String[] cabecalho = {"Modal", "Data Saída", "Data Chegada", "Cidade Origem", "Cidade Chegada"};
         String[][] dados = new String[escalas.size()][5];
         
         int counter = 0;
@@ -50,11 +38,11 @@ public class ViagemCtrl {
             counter++;
         }
 
-        escalasTable.setModel(new DefaultTableModel(dados, cabecalho));       
+        return new DefaultTableModel(dados, cabecalho);       
     }
     
-    public void displayViagens(List<Viagem> listaViagens, javax.swing.JTable table) {        
-        String[] cabecalho = {"Id", "DataSaída", "DataChegada", "CidadeOrigem", "CidadeChegada", "Valor"};
+    private DefaultTableModel construirTabelaViagem(List<Viagem> listaViagens) {        
+        String[] cabecalho = {"Id", "Data Saída", "Data Chegada", "Cidade Origem", "Cidade Chegada", "Valor"};
         String[][] dados = new String[listaViagens.size()][6];
 
         int counter = 0;
@@ -68,7 +56,7 @@ public class ViagemCtrl {
                         
             counter++;            
         }
-        table.setModel(new DefaultTableModel(dados, cabecalho));
-
+        
+        return new DefaultTableModel(dados, cabecalho);
     }
 }

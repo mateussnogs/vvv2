@@ -4,14 +4,11 @@ import static daos.DOA.LOGGER;
 import static daos.DOA.session;
 import java.util.List;
 import java.util.logging.Level;
-import model.Viagem;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
 public class ViagemDAO extends DOA{
     
-    public static List encontrarViagens() {
+    public static List pegarListaDeViagens() {
         List resultList = null;
         
         try {
