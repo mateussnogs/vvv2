@@ -1,27 +1,53 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Tela.Secundaria;
 
 import Tela.Principal.TelaDeMenu;
 import Tela.Tela;
 import VVV.ErroValidacao;
+import VVV.MensagemValidacao;
 import controllers.FuncionarioCtrl;
+import controllers.PontoDeVendaCtrl;
+import java.awt.Point;
 import java.util.Arrays;
-import javax.swing.JOptionPane;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 
-/**
- *
- * @author mateus
- */
 public class TelaCadastroFuncionario extends Tela {
-    /**
-     * Creates new form TelaCadastroFuncionario
-     */
+    private final List<JCheckBox> semanaRadioButtons;
+    private final byte[]          escala;
+    
+    private Object ultimoElemRemovido;
+    
     public TelaCadastroFuncionario() {
         initComponents();
+        semanaRadioButtons = Arrays.asList(new JCheckBox[]{
+            segundaCheck, tercaCheck, quartaCheck,
+            quintaCheck, sextaCheck, sabadoCheck,
+            domingoCheck, segundaCheck1, tercaCheck1,
+            quartaCheck1, quintaCheck1, sextaCheck1,
+            sabadoCheck1, domingoCheck1
+        });
+        
+        escala = new byte[14];
+    }
+    
+    @Override
+    public void mostrar(Point posicao){
+        super.mostrar(posicao);
+        
+        DefaultComboBoxModel pontoDeVendaComboModel = PontoDeVendaCtrl.comboBoxDePontosDeVendas();
+        
+        if(pontoDeVendaComboModel == null){
+            this.mostrarDialogoDeError(MensagemValidacao.PontoDeVenda.getMessagem("Vazio"));
+            this.voltarButtonActionPerformed(null);
+            return;
+        }
+        
+        PontoDeVendaComboBox.setModel(pontoDeVendaComboModel);
+        PontoDeVendaComboBox1.setModel(pontoDeVendaComboModel);
     }
 
     /**
@@ -49,6 +75,25 @@ public class TelaCadastroFuncionario extends Tela {
         voltarButton = new javax.swing.JButton();
         gerente = new javax.swing.JCheckBox();
         senha = new javax.swing.JPasswordField();
+        segundaCheck = new javax.swing.JCheckBox();
+        tercaCheck = new javax.swing.JCheckBox();
+        quartaCheck = new javax.swing.JCheckBox();
+        quintaCheck = new javax.swing.JCheckBox();
+        sextaCheck = new javax.swing.JCheckBox();
+        sabadoCheck = new javax.swing.JCheckBox();
+        domingoCheck = new javax.swing.JCheckBox();
+        jLabel9 = new javax.swing.JLabel();
+        PontoDeVendaComboBox = new javax.swing.JComboBox<>();
+        sabadoCheck1 = new javax.swing.JCheckBox();
+        domingoCheck1 = new javax.swing.JCheckBox();
+        jLabel10 = new javax.swing.JLabel();
+        PontoDeVendaComboBox1 = new javax.swing.JComboBox<>();
+        segundaCheck1 = new javax.swing.JCheckBox();
+        tercaCheck1 = new javax.swing.JCheckBox();
+        quartaCheck1 = new javax.swing.JCheckBox();
+        quintaCheck1 = new javax.swing.JCheckBox();
+        sextaCheck1 = new javax.swing.JCheckBox();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -83,11 +128,130 @@ public class TelaCadastroFuncionario extends Tela {
 
         gerente.setText("Gerente");
         gerente.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        gerente.addActionListener(new java.awt.event.ActionListener() {
+
+        segundaCheck.setText("Segunda");
+        segundaCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gerenteActionPerformed(evt);
+                checkActionPerformed(evt);
             }
         });
+
+        tercaCheck.setText("Terça");
+        tercaCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkActionPerformed(evt);
+            }
+        });
+
+        quartaCheck.setText("Quarta");
+        quartaCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkActionPerformed(evt);
+            }
+        });
+
+        quintaCheck.setText("Quinta");
+        quintaCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkActionPerformed(evt);
+            }
+        });
+
+        sextaCheck.setText("Sexta");
+        sextaCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkActionPerformed(evt);
+            }
+        });
+
+        sabadoCheck.setText("Sábado");
+        sabadoCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkActionPerformed(evt);
+            }
+        });
+
+        domingoCheck.setText("Domingo");
+        domingoCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Escala");
+
+        PontoDeVendaComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PontoDeVendaComboBoxActionPerformed(evt);
+            }
+        });
+
+        sabadoCheck1.setText("Sábado");
+        sabadoCheck1.setEnabled(false);
+        sabadoCheck1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkActionPerformed(evt);
+            }
+        });
+
+        domingoCheck1.setText("Domingo");
+        domingoCheck1.setEnabled(false);
+        domingoCheck1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Escala");
+
+        PontoDeVendaComboBox1.setEnabled(false);
+        PontoDeVendaComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PontoDeVendaComboBoxActionPerformed(evt);
+            }
+        });
+
+        segundaCheck1.setText("Segunda");
+        segundaCheck1.setEnabled(false);
+        segundaCheck1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkActionPerformed(evt);
+            }
+        });
+
+        tercaCheck1.setText("Terça");
+        tercaCheck1.setEnabled(false);
+        tercaCheck1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkActionPerformed(evt);
+            }
+        });
+
+        quartaCheck1.setText("Quarta");
+        quartaCheck1.setEnabled(false);
+        quartaCheck1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkActionPerformed(evt);
+            }
+        });
+
+        quintaCheck1.setText("Quinta");
+        quintaCheck1.setEnabled(false);
+        quintaCheck1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkActionPerformed(evt);
+            }
+        });
+
+        sextaCheck1.setText("Sexta");
+        sextaCheck1.setEnabled(false);
+        sextaCheck1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Ponto de Vendas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,73 +260,139 @@ public class TelaCadastroFuncionario extends Tela {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cadastrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cpf, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(gerente, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(telefone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                    .addComponent(endereco, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nome, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PontoDeVendaComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PontoDeVendaComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 18, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(segundaCheck)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tercaCheck)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(quartaCheck)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(quintaCheck)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(sextaCheck)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(sabadoCheck)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(domingoCheck))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(segundaCheck1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tercaCheck1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(quartaCheck1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(quintaCheck1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(sextaCheck1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(sabadoCheck1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(domingoCheck1))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(30, 30, 30)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cpf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(telefone, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(endereco, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nome, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(senha)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(gerente))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(cadastrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(30, 30, 30)
-                        .addComponent(usuario))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel4))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(gerente)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 13, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PontoDeVendaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(segundaCheck)
+                            .addComponent(tercaCheck)
+                            .addComponent(quartaCheck)
+                            .addComponent(quintaCheck)
+                            .addComponent(sextaCheck)
+                            .addComponent(sabadoCheck)
+                            .addComponent(domingoCheck))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 13, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 10, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(gerente)
+                            .addComponent(segundaCheck1)
+                            .addComponent(tercaCheck1)
+                            .addComponent(quartaCheck1)
+                            .addComponent(quintaCheck1)
+                            .addComponent(sextaCheck1)
+                            .addComponent(sabadoCheck1)
+                            .addComponent(domingoCheck1))
+                        .addGap(18, 21, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PontoDeVendaComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(voltarButton)
                     .addComponent(cadastrarButton))
@@ -189,7 +419,7 @@ public class TelaCadastroFuncionario extends Tela {
             
             this.voltarButtonActionPerformed(null);
         }catch(ErroValidacao e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            this.mostrarDialogoDeError(e.getMessage());
         }
         
         Arrays.fill(senhaArray, '\0'); //Security
@@ -199,58 +429,78 @@ public class TelaCadastroFuncionario extends Tela {
         this.abrirTelaRelativa(TelaDeMenu.instancia());
     }//GEN-LAST:event_voltarButtonActionPerformed
 
-    private void gerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gerenteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_gerenteActionPerformed
+    private void checkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkActionPerformed
+        JCheckBox self = (JCheckBox)evt.getSource();
+        int indice = semanaRadioButtons.indexOf(self);
+        int indiceDoProximo = (indice + 7) % 14;
+        
+        if(self.isSelected()){
+            escala[indice] = 1;
+            semanaRadioButtons.get(indiceDoProximo).setEnabled(false);
+            
+        }else{
+            escala[indice] = 0;
+            
+            if(indice <= 7 || PontoDeVendaComboBox1.isEnabled()){ //so habilita os botoes que puderem ser habilitados
+                semanaRadioButtons.get(indiceDoProximo).setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_checkActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void PontoDeVendaComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PontoDeVendaComboBoxActionPerformed
+        JComboBox<String> self = (JComboBox<String>) evt.getSource();
+        
+        if(self.getSelectedIndex() != 0){
+            if(self.equals(PontoDeVendaComboBox) && PontoDeVendaComboBox.getModel().getSize() > 2){
+                PontoDeVendaComboBox1.removeItem(PontoDeVendaComboBox.getSelectedItem());
+            
+                if(ultimoElemRemovido != null){
+                    PontoDeVendaComboBox1.addItem((String) ultimoElemRemovido);
+                }
+            
+                ultimoElemRemovido = PontoDeVendaComboBox.getSelectedItem();
+            
+                if(!PontoDeVendaComboBox1.isEnabled()){
+                    PontoDeVendaComboBox1.setEnabled(true);
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new TelaCadastroFuncionario().setVisible(true);
-        });
-    }
+    }//GEN-LAST:event_PontoDeVendaComboBoxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> PontoDeVendaComboBox;
+    private javax.swing.JComboBox<String> PontoDeVendaComboBox1;
     private javax.swing.JButton cadastrarButton;
     private javax.swing.JTextField cpf;
+    private javax.swing.JCheckBox domingoCheck;
+    private javax.swing.JCheckBox domingoCheck1;
     private javax.swing.JTextField endereco;
     private javax.swing.JCheckBox gerente;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField nome;
+    private javax.swing.JCheckBox quartaCheck;
+    private javax.swing.JCheckBox quartaCheck1;
+    private javax.swing.JCheckBox quintaCheck;
+    private javax.swing.JCheckBox quintaCheck1;
+    private javax.swing.JCheckBox sabadoCheck;
+    private javax.swing.JCheckBox sabadoCheck1;
+    private javax.swing.JCheckBox segundaCheck;
+    private javax.swing.JCheckBox segundaCheck1;
     private javax.swing.JPasswordField senha;
+    private javax.swing.JCheckBox sextaCheck;
+    private javax.swing.JCheckBox sextaCheck1;
     private javax.swing.JTextField telefone;
+    private javax.swing.JCheckBox tercaCheck;
+    private javax.swing.JCheckBox tercaCheck1;
     private javax.swing.JTextField usuario;
     private javax.swing.JButton voltarButton;
     // End of variables declaration//GEN-END:variables
