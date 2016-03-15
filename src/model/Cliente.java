@@ -1,5 +1,5 @@
 package model;
-// Generated 13-Mar-2016 22:50:52 by Hibernate Tools 4.3.1
+// Generated 14-Mar-2016 19:47:15 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -27,28 +27,32 @@ public class Cliente  implements java.io.Serializable {
 
      private Integer id;
      private String nome;
-     private int idade;
      private String cpf;
      private String telefone;
      private String profissao;
+     private String endereco;
+     private int idade;
      private Set<Reserva> reservas = new HashSet<Reserva>(0);
 
     public Cliente() {
     }
 
 	
-    public Cliente(String nome, int idade, String cpf, String telefone) {
+    public Cliente(String nome, String cpf, String telefone, String profissao, String endereco, int idade) {
         this.nome = nome;
-        this.idade = idade;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.profissao = profissao;
+        this.endereco = endereco;
+        this.idade = idade;
     }
-    public Cliente(String nome, int idade, String cpf, String telefone, String profissao, Set<Reserva> reservas) {
+    public Cliente(String nome, String cpf, String telefone, String profissao, String endereco, int idade, Set<Reserva> reservas) {
        this.nome = nome;
-       this.idade = idade;
        this.cpf = cpf;
        this.telefone = telefone;
        this.profissao = profissao;
+       this.endereco = endereco;
+       this.idade = idade;
        this.reservas = reservas;
     }
    
@@ -65,23 +69,13 @@ public class Cliente  implements java.io.Serializable {
     }
 
     
-    @Column(name="nome", nullable=false, length=45)
+    @Column(name="nome", nullable=false)
     public String getNome() {
         return this.nome;
     }
     
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    
-    @Column(name="idade", nullable=false)
-    public int getIdade() {
-        return this.idade;
-    }
-    
-    public void setIdade(int idade) {
-        this.idade = idade;
     }
 
     
@@ -95,7 +89,7 @@ public class Cliente  implements java.io.Serializable {
     }
 
     
-    @Column(name="telefone", nullable=false, length=45)
+    @Column(name="telefone", nullable=false, length=32)
     public String getTelefone() {
         return this.telefone;
     }
@@ -105,13 +99,33 @@ public class Cliente  implements java.io.Serializable {
     }
 
     
-    @Column(name="profissao", length=45)
+    @Column(name="profissao", nullable=false, length=64)
     public String getProfissao() {
         return this.profissao;
     }
     
     public void setProfissao(String profissao) {
         this.profissao = profissao;
+    }
+
+    
+    @Column(name="endereco", nullable=false)
+    public String getEndereco() {
+        return this.endereco;
+    }
+    
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    
+    @Column(name="idade", nullable=false)
+    public int getIdade() {
+        return this.idade;
+    }
+    
+    public void setIdade(int idade) {
+        this.idade = idade;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="cliente")

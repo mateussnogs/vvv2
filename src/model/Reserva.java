@@ -1,5 +1,5 @@
 package model;
-// Generated 13-Mar-2016 22:50:52 by Hibernate Tools 4.3.1
+// Generated 14-Mar-2016 19:47:15 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -30,18 +30,16 @@ public class Reserva  implements java.io.Serializable {
      private Funcionario funcionario;
      private Viagem viagem;
      private Date data;
-     private float valor;
-     private String status;
+     private boolean status;
 
     public Reserva() {
     }
 
-    public Reserva(Cliente cliente, Funcionario funcionario, Viagem viagem, Date data, float valor, String status) {
+    public Reserva(Cliente cliente, Funcionario funcionario, Viagem viagem, Date data, boolean status) {
        this.cliente = cliente;
        this.funcionario = funcionario;
        this.viagem = viagem;
        this.data = data;
-       this.valor = valor;
        this.status = status;
     }
    
@@ -58,7 +56,7 @@ public class Reserva  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="client_id", nullable=false)
+    @JoinColumn(name="Cliente_id", nullable=false)
     public Cliente getCliente() {
         return this.cliente;
     }
@@ -68,7 +66,7 @@ public class Reserva  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="funcionario_id", nullable=false)
+    @JoinColumn(name="Funcionario_id", nullable=false)
     public Funcionario getFuncionario() {
         return this.funcionario;
     }
@@ -78,7 +76,7 @@ public class Reserva  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="viagem_id", nullable=false)
+    @JoinColumn(name="Viagem_id", nullable=false)
     public Viagem getViagem() {
         return this.viagem;
     }
@@ -98,22 +96,12 @@ public class Reserva  implements java.io.Serializable {
     }
 
     
-    @Column(name="valor", nullable=false, precision=12, scale=0)
-    public float getValor() {
-        return this.valor;
-    }
-    
-    public void setValor(float valor) {
-        this.valor = valor;
-    }
-
-    
-    @Column(name="status", nullable=false, length=45)
-    public String getStatus() {
+    @Column(name="status", nullable=false)
+    public boolean isStatus() {
         return this.status;
     }
     
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

@@ -1,5 +1,5 @@
 package model;
-// Generated 13-Mar-2016 22:50:52 by Hibernate Tools 4.3.1
+// Generated 14-Mar-2016 19:47:15 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @Table(name="escala"
     ,catalog="vvv"
 )
-public class Escala  implements java.io.Serializable {
+public class Escala  implements java.io.Serializable{
 
 
      private Integer id;
@@ -45,7 +45,7 @@ public class Escala  implements java.io.Serializable {
        this.chegada = chegada;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
+    @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="id", unique=true, nullable=false)
@@ -58,7 +58,7 @@ public class Escala  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="cidade_destino_id", nullable=false)
+    @JoinColumn(name="Cidade_destino_id", nullable=false)
     public Cidade getCidadeByCidadeDestinoId() {
         return this.cidadeByCidadeDestinoId;
     }
@@ -68,7 +68,7 @@ public class Escala  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="cidade_origem_id", nullable=false)
+    @JoinColumn(name="Cidade_origem_id", nullable=false)
     public Cidade getCidadeByCidadeOrigemId() {
         return this.cidadeByCidadeOrigemId;
     }
@@ -78,7 +78,7 @@ public class Escala  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="modal_id", nullable=false)
+    @JoinColumn(name="Modal_id", nullable=false)
     public Modal getModal() {
         return this.modal;
     }
@@ -88,7 +88,7 @@ public class Escala  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="viagem_id", nullable=false)
+    @JoinColumn(name="Viagem_id", nullable=false)
     public Viagem getViagem() {
         return this.viagem;
     }
@@ -116,10 +116,6 @@ public class Escala  implements java.io.Serializable {
     public void setChegada(Date chegada) {
         this.chegada = chegada;
     }
-
-
-
-
 }
 
 

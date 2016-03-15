@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 13-Mar-2016 22:50:52 by Hibernate Tools 4.3.1 -->
+<!-- Generated 14-Mar-2016 19:47:16 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="model.Reserva" table="reserva" catalog="vvv" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -9,22 +9,19 @@
             <generator class="identity" />
         </id>
         <many-to-one name="cliente" class="model.Cliente" fetch="select">
-            <column name="client_id" not-null="true" />
+            <column name="Cliente_id" not-null="true" />
         </many-to-one>
         <many-to-one name="funcionario" class="model.Funcionario" fetch="select">
-            <column name="funcionario_id" not-null="true" />
+            <column name="Funcionario_id" not-null="true" />
         </many-to-one>
         <many-to-one name="viagem" class="model.Viagem" fetch="select">
-            <column name="viagem_id" not-null="true" />
+            <column name="Viagem_id" not-null="true" />
         </many-to-one>
         <property name="data" type="date">
             <column name="data" length="10" not-null="true" />
         </property>
-        <property name="valor" type="float">
-            <column name="valor" precision="12" scale="0" not-null="true" />
-        </property>
-        <property name="status" type="string">
-            <column name="status" length="45" not-null="true" />
+        <property name="status" type="boolean">
+            <column name="status" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

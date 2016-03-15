@@ -11,7 +11,7 @@ public class FuncionarioDAO extends DOA{
         try{
             session.beginTransaction();
             l = session
-                    .createQuery("select f from Funcionario as f where f.usuario = '" + usuario + "'")
+                    .createQuery(String.format("select f from Funcionario as f where f.usuario = '%s'", usuario))
                     .list();
             
             session.getTransaction().commit();
@@ -22,4 +22,22 @@ public class FuncionarioDAO extends DOA{
         
         return l;
     }
+    
+    public static List encontrarFuncionarioPorCpf(String cpf) {
+        List l = null;
+        
+        try {
+            session.beginTransaction();
+            l = session
+                    .createQuery(String.format("select f from Funcionario as f where f.cpf = '%s'", cpf))
+                    .list();
+            
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            LOGGER.log(Level.SEVERE, null, e);
+            session.getTransaction().rollback();
+        }
+        
+        return l;
+    }   
 }

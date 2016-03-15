@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import VVV.ErroValidacao;
 import daos.ClienteDAO;
 import java.util.List;
 import model.Cliente;
@@ -23,12 +24,11 @@ public class ClienteCtrl {
     //Checa se o cliente já está cadastrado
     public boolean verificarExistenciaCliente(String cpf) {
         List resultList = ClienteDAO.encontrarClientePorCpf(cpf);
-        
         return !(resultList != null && resultList.isEmpty());
     }
     
-    public Boolean cadastrarCliente(String nome, int idade, String cpf, String telefone, String profissao) {
-        return ClienteDAO.salvar(new Cliente(nome, idade, cpf, telefone, profissao, null));
+    public void cadastrarCliente(String nome, int idade, String cpf, String telefone, String endereco, String profissao) throws ErroValidacao {
+        ClienteDAO.salvar(new Cliente(nome, cpf, telefone, profissao, endereco, idade));
     }
     
     public Cliente encontrarClientePorCpf(String cpf) {

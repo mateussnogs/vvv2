@@ -7,6 +7,7 @@ package Tela.Secundaria;
 
 import Tela.Principal.TelaDeMenu;
 import Tela.Tela;
+import VVV.ErroValidacao;
 import controllers.FuncionarioCtrl;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
@@ -176,11 +177,6 @@ public class TelaCadastroFuncionario extends Tela {
         char[] senhaArray = this.senha.getPassword();
         int tipo = gerente.isSelected()? 0 : 1;
         
-        if(FuncionarioCtrl.verificarExistenciaFuncionario(usuario)){
-            JOptionPane.showMessageDialog(this, "Nome de usuário já está cadastrado.");
-            return;
-        }
-        
         try{
             FuncionarioCtrl.cadastrarFuncionario(nome.getText(),
                     endereco.getText(),
@@ -192,7 +188,7 @@ public class TelaCadastroFuncionario extends Tela {
             );
             
             this.voltarButtonActionPerformed(null);
-        }catch(Exception e){/**@todo add the right exception type here*/
+        }catch(ErroValidacao e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
         

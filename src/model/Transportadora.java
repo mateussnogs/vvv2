@@ -1,5 +1,5 @@
 package model;
-// Generated 13-Mar-2016 22:50:52 by Hibernate Tools 4.3.1
+// Generated 14-Mar-2016 19:47:15 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -52,7 +52,7 @@ public class Transportadora  implements java.io.Serializable {
     }
 
     
-    @Column(name="nome", nullable=false, length=45)
+    @Column(name="nome", nullable=false)
     public String getNome() {
         return this.nome;
     }

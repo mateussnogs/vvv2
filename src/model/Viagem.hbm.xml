@@ -1,37 +1,25 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 13-Mar-2016 22:50:52 by Hibernate Tools 4.3.1 -->
+<!-- Generated 14-Mar-2016 19:47:16 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="model.Viagem" table="viagem" catalog="vvv" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="cidadeByCidadeDestinoId" class="model.Cidade" fetch="select">
-            <column name="cidade_destino_id" not-null="true" />
-        </many-to-one>
-        <many-to-one name="cidadeByCidadeOrigemId" class="model.Cidade" fetch="select">
-            <column name="cidade_origem_id" not-null="true" />
-        </many-to-one>
-        <property name="saida" type="timestamp">
-            <column name="saida" length="19" not-null="true" />
-        </property>
-        <property name="chegada" type="timestamp">
-            <column name="chegada" length="19" not-null="true" />
-        </property>
         <property name="valor" type="float">
             <column name="valor" precision="12" scale="0" not-null="true" />
         </property>
         <set name="reservas" table="reserva" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="viagem_id" not-null="true" />
+                <column name="Viagem_id" not-null="true" />
             </key>
             <one-to-many class="model.Reserva" />
         </set>
         <set name="escalas" table="escala" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="viagem_id" not-null="true" />
+                <column name="Viagem_id" not-null="true" />
             </key>
             <one-to-many class="model.Escala" />
         </set>

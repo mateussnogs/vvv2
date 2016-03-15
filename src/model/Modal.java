@@ -1,5 +1,5 @@
 package model;
-// Generated 13-Mar-2016 22:50:52 by Hibernate Tools 4.3.1
+// Generated 14-Mar-2016 19:47:15 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -30,7 +30,7 @@ public class Modal  implements java.io.Serializable {
 
      private Integer id;
      private Transportadora transportadora;
-     private String tipoModal;
+     private String tipo;
      private int capacidade;
      private String modelo;
      private Date anoFab;
@@ -42,18 +42,18 @@ public class Modal  implements java.io.Serializable {
     }
 
 	
-    public Modal(Transportadora transportadora, String tipoModal, int capacidade, String modelo, Date anoFab, boolean manutencao, int vagasDisponiveis) {
+    public Modal(Transportadora transportadora, String tipo, int capacidade, String modelo, Date anoFab, boolean manutencao, int vagasDisponiveis) {
         this.transportadora = transportadora;
-        this.tipoModal = tipoModal;
+        this.tipo = tipo;
         this.capacidade = capacidade;
         this.modelo = modelo;
         this.anoFab = anoFab;
         this.manutencao = manutencao;
         this.vagasDisponiveis = vagasDisponiveis;
     }
-    public Modal(Transportadora transportadora, String tipoModal, int capacidade, String modelo, Date anoFab, boolean manutencao, int vagasDisponiveis, Set<Escala> escalas) {
+    public Modal(Transportadora transportadora, String tipo, int capacidade, String modelo, Date anoFab, boolean manutencao, int vagasDisponiveis, Set<Escala> escalas) {
        this.transportadora = transportadora;
-       this.tipoModal = tipoModal;
+       this.tipo = tipo;
        this.capacidade = capacidade;
        this.modelo = modelo;
        this.anoFab = anoFab;
@@ -75,7 +75,7 @@ public class Modal  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="transportadora_id", nullable=false)
+    @JoinColumn(name="Transportadora_id", nullable=false)
     public Transportadora getTransportadora() {
         return this.transportadora;
     }
@@ -85,13 +85,13 @@ public class Modal  implements java.io.Serializable {
     }
 
     
-    @Column(name="tipo_modal", nullable=false, length=45)
-    public String getTipoModal() {
-        return this.tipoModal;
+    @Column(name="tipo", nullable=false)
+    public String getTipo() {
+        return this.tipo;
     }
     
-    public void setTipoModal(String tipoModal) {
-        this.tipoModal = tipoModal;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     
@@ -105,7 +105,7 @@ public class Modal  implements java.io.Serializable {
     }
 
     
-    @Column(name="modelo", nullable=false, length=45)
+    @Column(name="modelo", nullable=false)
     public String getModelo() {
         return this.modelo;
     }

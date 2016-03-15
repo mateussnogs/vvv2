@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 13-Mar-2016 22:50:52 by Hibernate Tools 4.3.1 -->
+<!-- Generated 14-Mar-2016 19:47:16 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="model.Modal" table="modal" catalog="vvv" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -9,16 +9,16 @@
             <generator class="identity" />
         </id>
         <many-to-one name="transportadora" class="model.Transportadora" fetch="select">
-            <column name="transportadora_id" not-null="true" />
+            <column name="Transportadora_id" not-null="true" />
         </many-to-one>
-        <property name="tipoModal" type="string">
-            <column name="tipo_modal" length="45" not-null="true" />
+        <property name="tipo" type="string">
+            <column name="tipo" not-null="true" />
         </property>
         <property name="capacidade" type="int">
             <column name="capacidade" not-null="true" />
         </property>
         <property name="modelo" type="string">
-            <column name="modelo" length="45" not-null="true" />
+            <column name="modelo" not-null="true" />
         </property>
         <property name="anoFab" type="date">
             <column name="ano_fab" length="10" not-null="true" />
@@ -31,7 +31,7 @@
         </property>
         <set name="escalas" table="escala" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="modal_id" not-null="true" />
+                <column name="Modal_id" not-null="true" />
             </key>
             <one-to-many class="model.Escala" />
         </set>

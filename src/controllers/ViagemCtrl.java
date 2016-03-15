@@ -7,7 +7,6 @@ package controllers;
 
 import daos.ViagemDAO;
 import java.util.List;
-import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 import model.Escala;
 import model.Viagem;
@@ -22,14 +21,14 @@ public class ViagemCtrl {
     }
     
     private DefaultTableModel construirTabelaEscala(Viagem viagem) {
-        Set<Escala> escalas = viagem.getEscalas();
+        List<Escala> escalas = viagem.getEscalas();
         
         String[] cabecalho = {"Modal", "Data Saída", "Data Chegada", "Cidade Origem", "Cidade Chegada"};
         String[][] dados = new String[escalas.size()][5];
         
         int counter = 0;
         for (Escala e : escalas) {
-            dados[counter][0] = e.getModal().getTipoModal();
+            dados[counter][0] = e.getModal().getTipo();
             dados[counter][1] = e.getSaida().toString();
             dados[counter][2] = e.getChegada().toString();
             dados[counter][3] = e.getCidadeByCidadeOrigemId().getNome();
@@ -41,17 +40,22 @@ public class ViagemCtrl {
         return new DefaultTableModel(dados, cabecalho);       
     }
     
-    private DefaultTableModel construirTabelaViagem(List<Viagem> listaViagens) {        
+    private DefaultTableModel construirTabelaViagem(List<Viagem> listaViagens) {      
         String[] cabecalho = {"Id", "Data Saída", "Data Chegada", "Cidade Origem", "Cidade Chegada", "Valor"};
         String[][] dados = new String[listaViagens.size()][6];
+        Escala primeira;
+        Escala ultima;
 
         int counter = 0;
         for (Viagem viagem : listaViagens) {
+            primeira = viagem.getEscalas().get(0);
+            ultima = viagem.getEscalas().get(viagem.getEscalas().size() - 1);
+            
             dados[counter][0] = viagem.getId().toString();
-            dados[counter][1] = viagem.getSaida().toString();
-            dados[counter][2] = viagem.getChegada().toString();
-            dados[counter][3] = viagem.getCidadeByCidadeOrigemId().getNome();
-            dados[counter][4] = viagem.getCidadeByCidadeDestinoId().getNome();
+            dados[counter][1] = primeira.getSaida().toString();
+            dados[counter][2] = ultima.getChegada().toString();
+            dados[counter][3] = primeira.getCidadeByCidadeOrigemId().getNome();
+            dados[counter][4] = ultima.getCidadeByCidadeDestinoId().getNome();
             dados[counter][5] = Float.toString(viagem.getValor());
                         
             counter++;            

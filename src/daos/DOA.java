@@ -1,5 +1,6 @@
 package daos;
 
+import VVV.ErroValidacao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.HibernateException;
@@ -23,18 +24,15 @@ public class DOA {
         }
     }
     
-    public static Boolean salvar(Object o) {
+    public static void salvar(Object o) {
         try{
             session.beginTransaction();
             session.save(o);
             session.getTransaction().commit();
             
-            return true;            
         }catch(RuntimeException e){
-            LOGGER.log(Level.SEVERE, null, e);
+            LOGGER.log(Level.SEVERE, null, e);            
             session.getTransaction().rollback();
         }
-        
-        return false;
     }
 }

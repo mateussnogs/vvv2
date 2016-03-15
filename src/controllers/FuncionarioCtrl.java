@@ -1,11 +1,14 @@
 package controllers;
 
+import VVV.ErroValidacao;
+import VVV.MensagemValidacao;
 import daos.FuncionarioDAO;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import model.Funcionario;
 import lib.jBCrypt.BCrypt;
 
@@ -15,34 +18,65 @@ public class FuncionarioCtrl {
     public static final int GERENTE     = 0;
     public static final int FUNCIONARIO = 1;
     
-    private static final Logger LOGGER = Logger.getLogger(FuncionarioCtrl.class.getName());
-    private static Funcionario  logado = null;
+    private static final Logger    LOGGER    = Logger.getLogger(FuncionarioCtrl.class.getName());
+    private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
+    
+    public static enum Campo{CPF, USUARIO}
+    
+    private static Funcionario logado = null;
     
     public static Funcionario getUsuarioLogado() {
         return logado;
     }
     
-    public static boolean verificarExistenciaFuncionario(String user) {
-        List query = FuncionarioDAO.encontrarFuncionarioPorUsuario(user);
+    public static boolean verificarExistenciaFuncionario(String valor, Campo campo) {
+        List query = campo == Campo.USUARIO?
+                FuncionarioDAO.encontrarFuncionarioPorUsuario(valor)
+                : FuncionarioDAO.encontrarFuncionarioPorCpf(valor);
+        
         return !(query == null || query.isEmpty());
     }
     
     public static Funcionario encontrarFuncionarioPorUsuario(String user) {
         List query = FuncionarioDAO.encontrarFuncionarioPorUsuario(user);
-        return query == null? null : (Funcionario)(query.get(0));
+        return query == null || query.isEmpty()? null : (Funcionario)(query.get(0));
     }
     
-    /*@todo Add Bean Validation here**/
-    public static void cadastrarFuncionario(String nome, String endereco, String telefone, int cargo, String senha, String userName, String cpf) {
-        FuncionarioDAO.salvar(new Funcionario(
+    public static void cadastrarFuncionario(
+            String nome,
+            String endereco,
+            String telefone,
+            int cargo,
+            String senha,
+            String nomeDeUsuario,
+            String cpf
+    ) throws ErroValidacao {
+        
+        if(senha.length() < 6){
+            MensagemValidacao.Senha.throwErroValidacao("Tamanho");
+        }
+        
+        Funcionario funcionario = new Funcionario(
                 nome,
                 endereco,
                 telefone,
                 cargo,
                 BCrypt.hashpw(senha, BCrypt.gensalt(12)).getBytes(),
-                userName,
+                nomeDeUsuario,
                 cpf
-        ));
+        );
+        
+        if(FuncionarioCtrl.verificarExistenciaFuncionario(nomeDeUsuario, FuncionarioCtrl.Campo.USUARIO)){
+            MensagemValidacao.Usuario.throwErroValidacao("Unico");
+        }
+        
+        if(FuncionarioCtrl.verificarExistenciaFuncionario(cpf, FuncionarioCtrl.Campo.CPF)){
+            MensagemValidacao.Cpf.throwErroValidacao("Unico");
+        }
+        
+        MensagemValidacao.assertValidacao(VALIDATOR.validate(funcionario));
+        
+        FuncionarioDAO.salvar(funcionario);
     }
     
     public static Boolean login(String usuario, String senha){

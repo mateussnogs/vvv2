@@ -1,5 +1,5 @@
 package model;
-// Generated 13-Mar-2016 22:50:52 by Hibernate Tools 4.3.1
+// Generated 14-Mar-2016 19:47:15 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -68,7 +68,7 @@ public class Pontodevenda  implements java.io.Serializable {
     }
 
     
-    @Column(name="endereco", nullable=false, length=45)
+    @Column(name="endereco", nullable=false)
     public String getEndereco() {
         return this.endereco;
     }
@@ -78,7 +78,7 @@ public class Pontodevenda  implements java.io.Serializable {
     }
 
     
-    @Column(name="nome", nullable=false, length=45)
+    @Column(name="nome", nullable=false)
     public String getNome() {
         return this.nome;
     }
@@ -88,7 +88,7 @@ public class Pontodevenda  implements java.io.Serializable {
     }
 
     
-    @Column(name="cnpj", unique=true, nullable=false, length=45)
+    @Column(name="cnpj", unique=true, nullable=false, length=14)
     public String getCnpj() {
         return this.cnpj;
     }
@@ -98,7 +98,7 @@ public class Pontodevenda  implements java.io.Serializable {
     }
 
     
-    @Column(name="telefone", nullable=false, length=45)
+    @Column(name="telefone", nullable=false, length=32)
     public String getTelefone() {
         return this.telefone;
     }

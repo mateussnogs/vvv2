@@ -7,6 +7,7 @@ package Tela.Secundaria;
 
 import Tela.Principal.TelaDeMenu;
 import Tela.Tela;
+import VVV.ErroValidacao;
 import controllers.ClienteCtrl;
 import javax.swing.JOptionPane;
 
@@ -170,30 +171,19 @@ public class TelaCadastroCliente extends Tela {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private boolean CamposPreenchidos() {
-        if (nome.getText().equals(""))
-            return false;
-        else if (idade.getText().equals(""))
-            return false;
-        else if(cpf.getText().equals("")) {
-            return false;
-        }
-        else if(telefone.getText().equals(""))
-            return false;
-        else if (profissao.getText().equals(""))
-            return false;
-        else
-            return true;
-    } 
     private void cadastrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarButtonActionPerformed
-        if (CamposPreenchidos()) {
-            if(!clienteCtrl.cadastrarCliente(nome.getText(), Integer.parseInt(idade.getText()), cpf.getText(), endereco.getText(), telefone.getText(), profissao.getText())){
-                JOptionPane.showMessageDialog(this, "Senha ou Usuario inválidos.");
-            }
+        try{
+            clienteCtrl.cadastrarCliente(
+                    nome.getText(),
+                    Integer.parseInt(idade.getText()),
+                    cpf.getText(), endereco.getText(),
+                    telefone.getText(),
+                    profissao.getText()
+            );
+            
+        }catch(ErroValidacao e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
-        else 
-            System.out.println("Preencha todos os campos");
         
         this.abrirTelaRelativa(TelaDeMenu.instancia());
     }//GEN-LAST:event_cadastrarButtonActionPerformed
