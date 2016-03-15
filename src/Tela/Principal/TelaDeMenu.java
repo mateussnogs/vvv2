@@ -1,5 +1,6 @@
 package Tela.Principal;
 
+import Tela.Secundaria.TelaCadastrarPontoDeVenda;
 import Tela.Tela;
 import Tela.Secundaria.TelaCadastroCliente;
 import Tela.Secundaria.TelaCadastroFuncionario;
@@ -17,16 +18,8 @@ public class TelaDeMenu extends Tela {
         return TELA;
     }
     
-    public TelaCadastroFuncionario telaCadastroFuncionario;
-    public TelaCadastroCliente     telaCadastroCliente;
-    public TelaViagens             telaViagens;
-    
     private TelaDeMenu() {
         initComponents();
-        
-        telaCadastroFuncionario = new TelaCadastroFuncionario();
-        telaCadastroCliente     = new TelaCadastroCliente();
-        telaViagens             = new TelaViagens();
         
         String cargo;
         
@@ -62,6 +55,7 @@ public class TelaDeMenu extends Tela {
         jLabel1 = new javax.swing.JLabel();
         nomeDeUsuario = new javax.swing.JLabel();
         painelGerente = new javax.swing.JPanel();
+        cadastrarPontoDeVendaButton = new javax.swing.JButton();
         cadastrarFuncionarioButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -96,6 +90,13 @@ public class TelaDeMenu extends Tela {
 
         painelGerente.setBackground(new java.awt.Color(200, 200, 200));
 
+        cadastrarPontoDeVendaButton.setText("Cadastrar Ponto de Venda");
+        cadastrarPontoDeVendaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarPontoDeVendaButtonActionPerformed(evt);
+            }
+        });
+
         cadastrarFuncionarioButton.setText("Cadastrar Funcionário");
         cadastrarFuncionarioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,16 +108,20 @@ public class TelaDeMenu extends Tela {
         painelGerente.setLayout(painelGerenteLayout);
         painelGerenteLayout.setHorizontalGroup(
             painelGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelGerenteLayout.createSequentialGroup()
+            .addGroup(painelGerenteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cadastrarFuncionarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                .addGroup(painelGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cadastrarPontoDeVendaButton, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                    .addComponent(cadastrarFuncionarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         painelGerenteLayout.setVerticalGroup(
             painelGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelGerenteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cadastrarFuncionarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cadastrarPontoDeVendaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cadastrarFuncionarioButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -160,16 +165,16 @@ public class TelaDeMenu extends Tela {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cadastrarFuncionarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarFuncionarioButtonActionPerformed
-        this.abrirTelaRelativa(telaCadastroFuncionario);
-    }//GEN-LAST:event_cadastrarFuncionarioButtonActionPerformed
+    private void cadastrarPontoDeVendaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarPontoDeVendaButtonActionPerformed
+        this.abrirTelaRelativa(new TelaCadastrarPontoDeVenda());
+    }//GEN-LAST:event_cadastrarPontoDeVendaButtonActionPerformed
 
     private void cadastrarClienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarClienteButtonActionPerformed
-        this.abrirTelaRelativa(telaCadastroCliente);
+        this.abrirTelaRelativa(new TelaCadastroCliente());
     }//GEN-LAST:event_cadastrarClienteButtonActionPerformed
 
     private void irViagensButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irViagensButtonActionPerformed
-        this.abrirTelaRelativa(telaViagens);
+        this.abrirTelaRelativa(new TelaViagens());
     }//GEN-LAST:event_irViagensButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
@@ -178,9 +183,14 @@ public class TelaDeMenu extends Tela {
         TELA = null;
     }//GEN-LAST:event_logoutButtonActionPerformed
 
+    private void cadastrarFuncionarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarFuncionarioButtonActionPerformed
+        this.abrirTelaRelativa(new TelaCadastroFuncionario());
+    }//GEN-LAST:event_cadastrarFuncionarioButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cadastrarClienteButton;
     private javax.swing.JButton cadastrarFuncionarioButton;
+    private javax.swing.JButton cadastrarPontoDeVendaButton;
     private javax.swing.JButton irViagensButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton logoutButton;

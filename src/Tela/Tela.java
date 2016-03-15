@@ -5,15 +5,15 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Rectangle;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Tela extends JFrame{
     public static final int MONITOR_PRINCIPAL = 0;
     
     public Tela(){}
     
-    public void mostrar(){
-        this.setVisible(true);
-        this.centralizar(MONITOR_PRINCIPAL);
+    public final void mostrar(){
+        this.mostrar(this.getCentro(MONITOR_PRINCIPAL));
     }
     
     public void mostrar(Point posicao){
@@ -23,6 +23,10 @@ public class Tela extends JFrame{
     
     public void esconder(){
         this.setVisible(false);
+    }
+    
+    public final void mostrarDialogoDeError(String mensagem){
+        JOptionPane.showMessageDialog(this, mensagem, "Error", JOptionPane.ERROR_MESSAGE);
     }
     
     protected void abrirTelaRelativa(Tela tela){
@@ -36,6 +40,10 @@ public class Tela extends JFrame{
     }
     
     public final void centralizar(int monitorId){
+        this.setLocation(this.getCentro(monitorId));
+    }
+    
+    private Point getCentro(int monitorId){
         Rectangle limites;
         GraphicsDevice[] aparelhos =
                 GraphicsEnvironment
@@ -48,7 +56,8 @@ public class Tela extends JFrame{
         }
         
         limites = aparelhos[monitorId].getDefaultConfiguration().getBounds();
-        this.setLocation(
+        
+        return new Point(
                 (limites.width - this.getWidth()) / 2 + limites.x,
                 (limites.height - this.getHeight()) / 2 + limites.y
         );

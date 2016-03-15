@@ -23,6 +23,12 @@ public enum MensagemValidacao{
     Profissao(),
     Idade(
             "Invalido", "Idade inválida"
+    ),
+    Cnpj(
+            "Unico", "Já existe um Ponto de Vendas cadastrado com esse CNPJ."
+    ),
+    PontoDeVenda(
+            "Vazio", "Não há nenhum Ponto de Venda cadastrado."
     )
     ;
         
@@ -59,7 +65,6 @@ public enum MensagemValidacao{
     }
     
     MensagemValidacao(String... mensagens){
-        System.out.println(Arrays.toString(mensagens));
         if(mensagens.length > 0){
             populate(mensagens);
         }

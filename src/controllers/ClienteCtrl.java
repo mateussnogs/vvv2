@@ -16,7 +16,6 @@ public class ClienteCtrl {
         return query == null? null : (Cliente)(query.get(0));
     }
     
-    //Checa se o cliente já está cadastrado
     public static boolean verificarExistenciaCliente(String cpf) {
         List resultList = ClienteDAO.encontrarClientePorCpf(cpf);
         return !(resultList != null && resultList.isEmpty());

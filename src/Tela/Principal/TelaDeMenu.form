@@ -112,9 +112,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cadastrarFuncionarioButton" pref="173" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="cadastrarPontoDeVendaButton" pref="173" max="32767" attributes="0"/>
+                      <Component id="cadastrarFuncionarioButton" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -123,13 +126,23 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cadastrarFuncionarioButton" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="cadastrarPontoDeVendaButton" min="-2" pref="23" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="cadastrarFuncionarioButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
+        <Component class="javax.swing.JButton" name="cadastrarPontoDeVendaButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cadastrar Ponto de Venda"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarPontoDeVendaButtonActionPerformed"/>
+          </Events>
+        </Component>
         <Component class="javax.swing.JButton" name="cadastrarFuncionarioButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastrar Funcion&#xe1;rio"/>
