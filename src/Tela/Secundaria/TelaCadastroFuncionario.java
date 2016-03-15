@@ -50,6 +50,7 @@ public class TelaCadastroFuncionario extends Tela {
         senha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("Nome");
 

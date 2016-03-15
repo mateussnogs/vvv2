@@ -46,6 +46,8 @@ public class TelaDeLogin extends Tela {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
+        setResizable(false);
 
         jLabel1.setText("Usuário");
 

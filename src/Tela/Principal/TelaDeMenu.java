@@ -35,6 +35,8 @@ public class TelaDeMenu extends Tela {
             
             painelGerente.setVisible(false);
             painelGerente.repaint();
+            super.setSize(super.getWidth(), super.getHeight() - painelGerente.getHeight());
+            
         }else{
             cargo = "Gerente: ";
             
@@ -63,6 +65,7 @@ public class TelaDeMenu extends Tela {
         cadastrarFuncionarioButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         cadastrarClienteButton.setText("Cadastrar Cliente");
         cadastrarClienteButton.addActionListener(new java.awt.event.ActionListener() {

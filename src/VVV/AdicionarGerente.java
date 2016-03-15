@@ -1,7 +1,6 @@
 package VVV;
 
 import controllers.FuncionarioCtrl;
-import daos.DOA;
 
 public class AdicionarGerente {
     public static void main(String[] args) {
