@@ -66,6 +66,8 @@ public class FuncionarioCtrl {
                 cpf
         );
         
+        MensagemValidacao.assertValidacao(VALIDATOR.validate(funcionario));
+        
         if(FuncionarioCtrl.verificarExistenciaFuncionario(nomeDeUsuario, FuncionarioCtrl.Campo.USUARIO)){
             MensagemValidacao.Usuario.throwErroValidacao("Unico");
         }
@@ -73,8 +75,6 @@ public class FuncionarioCtrl {
         if(FuncionarioCtrl.verificarExistenciaFuncionario(cpf, FuncionarioCtrl.Campo.CPF)){
             MensagemValidacao.Cpf.throwErroValidacao("Unico");
         }
-        
-        MensagemValidacao.assertValidacao(VALIDATOR.validate(funcionario));
         
         FuncionarioDAO.salvar(funcionario);
     }

@@ -16,8 +16,6 @@ import javax.swing.JOptionPane;
  * @author mateus
  */
 public class TelaCadastroCliente extends Tela {
-    public ClienteCtrl clienteCtrl = new ClienteCtrl();
-
     /**
      * Creates new form TelaCadastroCliente
      */
@@ -112,12 +110,12 @@ public class TelaCadastroCliente extends Tela {
                                     .addComponent(profissao)
                                     .addComponent(cpf)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(voltarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, Short.MAX_VALUE)
-                                .addComponent(cadastrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(cadastrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -173,19 +171,19 @@ public class TelaCadastroCliente extends Tela {
     }// </editor-fold>//GEN-END:initComponents
     private void cadastrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarButtonActionPerformed
         try{
-            clienteCtrl.cadastrarCliente(
+            ClienteCtrl.cadastrarCliente(
                     nome.getText(),
-                    Integer.parseInt(idade.getText()),
-                    cpf.getText(), endereco.getText(),
+                    idade.getText(),
+                    cpf.getText(),
                     telefone.getText(),
+                    endereco.getText(),
                     profissao.getText()
             );
             
+            this.voltarButtonActionPerformed(null);
         }catch(ErroValidacao e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
-        
-        this.abrirTelaRelativa(TelaDeMenu.instancia());
     }//GEN-LAST:event_cadastrarButtonActionPerformed
 
     private void voltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarButtonActionPerformed

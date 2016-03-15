@@ -13,7 +13,7 @@ public class ClienteDAO extends DOA{
         try {
             session.beginTransaction();
             resultList = session
-                    .createQuery("select c from Cliente as c where c.cpf = " + cpf)
+                    .createQuery(String.format("select c from Cliente as c where c.cpf = '%s'", cpf))
                     .list();
             
             session.getTransaction().commit();

@@ -54,7 +54,6 @@ public class Funcionario  implements java.io.Serializable {
      private String usuario;
      
      @NotBlank(message = "VAZIO")
-     @Size(min = 11, max = 11, message = "TAMANHO")
      @CPF(message = "TAMANHO")
      private String cpf;
      private Set<Reserva> reservas = new HashSet<>(0);
